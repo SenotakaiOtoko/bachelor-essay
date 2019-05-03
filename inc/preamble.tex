@@ -15,18 +15,23 @@
 
 % Шрифты, xelatex
 \defaultfontfeatures{Ligatures=TeX}
-\newfontfamily\cyrillicfont{Times New Roman}
 \setmainfont{Times New Roman} % Нормоконтроллеры хотят именно его
+\newfontfamily\cyrillicfont{Times New Roman}
 %\setsansfont{Liberation Sans} % Тут я его не использую, но если пригодится
-%\setmonofont{FreeMono} % Моноширинный шрифт для оформления кода
-\setmonofont{Anonymous Pro} % Моноширинный шрифт для оформления кода
+\setmonofont{FreeMono} % Моноширинный шрифт для оформления кода
+%\setmonofont{Anonymous Pro} % Моноширинный шрифт для оформления кода
 
 % Русский язык
 \usepackage{polyglossia}
 \setdefaultlanguage{russian}
 
-\usepackage{amssymb,amsfonts,amsmath} % Математика
-\numberwithin{equation}{section} % Формула вида секция.номер
+% Формулы
+\usepackage{mathtools,unicode-math} % Не совместим с amsmath
+\setmathfont{XITS Math}             % Шрифт для формул: https://github.com/khaledhosny/xits-math
+\numberwithin{equation}{section}    % Формула вида секция.номер
+
+%\usepackage{amssymb,amsfonts,amsmath} % Математика
+%\numberwithin{equation}{section} % Формула вида секция.номер
 
 \usepackage{enumerate} % Тонкая настройка списков
 \usepackage{indentfirst} % Красная строка после заголовка
@@ -39,14 +44,17 @@
 
 % Формат подрисуночных записей
 \usepackage{chngcntr}
+
+% Сбрасываем счетчик таблиц и рисунков в каждой новой главе
 \counterwithin{figure}{section}
+\counterwithin{table}{section}
 
 % Гиперссылки
 \usepackage{hyperref}
 \hypersetup{
     colorlinks, urlcolor={black}, % Все ссылки черного цвета, кликабельные
     linkcolor={black}, citecolor={black}, filecolor={black},
-    pdfauthor={Амет Умеров},
+    pdfauthor={Рыбаков Виктор},
     pdftitle={Разработка виртуальной инфраструктуры для реализации облачных услуг}
 }
 
@@ -99,7 +107,6 @@
 \pagestyle{fancy}
 \fancyhf{}
 \fancyfoot[C]{\textrm{\thepage}}
-\fancyhead[R]{\textrm{\thepage}}
 \fancyheadoffset{0mm}
 \fancyfootoffset{0mm}
 \setlength{\headheight}{17pt}
@@ -185,6 +192,25 @@
     \addcontentsline{toc}{section}{\uppercase{#1}}
 }
 
+% Секция для аннотации (она не включается в содержание)
+\newcommand{\annotation}[1]{
+    \paragraph{\centerline{{#1}}\vspace{1em}}
+}
+
+% Секция для списка иллюстративного материала
+\newcommand{\lof}{
+    \phantomsection
+    \listoffigures
+    \addcontentsline{toc}{section}{\listfigurename}
+}
+
+% Секция для списка табличного материала
+\newcommand{\lot}{
+    \phantomsection
+    \listoftables
+    \addcontentsline{toc}{section}{\listtablename}
+}
+
 % Библиография: отступы и межстрочный интервал
 \makeatletter
 \renewenvironment{thebibliography}[1]
@@ -202,4 +228,5 @@
     }
 \makeatother
 
+\usepackage{lastpage} % Подсчет количества страниц
 \setcounter{page}{4} % Начало нумерации страниц

@@ -9,7 +9,7 @@ run:
 	xreader master-thesis.pdf &
 
 clean:
-	rm *.aux \
+	rm -f *.aux \
 	*.fdb_latexmk \
 	*.fls \
 	*.lof \
