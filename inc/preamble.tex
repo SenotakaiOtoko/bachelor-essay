@@ -15,10 +15,11 @@
 
 % Шрифты, xelatex
 \defaultfontfeatures{Ligatures=TeX}
-\setmainfont{Times New Roman} % Нормоконтроллеры хотят именно его
 \newfontfamily\cyrillicfont{Times New Roman}
+\setmainfont{Times New Roman} % Нормоконтроллеры хотят именно его
 %\setsansfont{Liberation Sans} % Тут я его не использую, но если пригодится
-\setmonofont{FreeMono} % Моноширинный шрифт для оформления кода
+%\setmonofont{FreeMono} % Моноширинный шрифт для оформления кода
+\setmonofont{Anonymous Pro} % Моноширинный шрифт для оформления кода
 
 % Русский язык
 \usepackage{polyglossia}
@@ -97,6 +98,7 @@
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
+\fancyfoot[C]{\textrm{\thepage}}
 \fancyhead[R]{\textrm{\thepage}}
 \fancyheadoffset{0mm}
 \fancyfootoffset{0mm}
