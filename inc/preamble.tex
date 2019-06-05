@@ -5,6 +5,8 @@
 \usepackage{xltxtra}  % Верхние и нижние индексы
 \usepackage{pdfpages} % Вставка PDF
 
+\usepackage{setspace} % Задание межстрочного интервала
+
 \usepackage{listings} % Оформление исходного кода
 \lstset{
     basicstyle=\small\ttfamily, % Размер и тип шрифта
@@ -37,6 +39,7 @@
 \usepackage{indentfirst} % Красная строка после заголовка
 \usepackage{float} % Расширенное управление плавающими объектами
 \usepackage{multirow} % Сложные таблицы
+\usepackage{longtable} % Длинные таблицы
 
 % Пути к каталогам с изображениями
 \usepackage{graphicx} % Вставка картинок и дополнений
@@ -55,7 +58,7 @@
     colorlinks, urlcolor={black}, % Все ссылки черного цвета, кликабельные
     linkcolor={black}, citecolor={black}, filecolor={black},
     pdfauthor={Рыбаков Виктор},
-    pdftitle={Разработка виртуальной инфраструктуры для реализации облачных услуг}
+    pdftitle={Разработка проекта онлайн-сервиса с эоементами социальной сети для публикации фотографий}
 }
 
 % Оформление библиографии и подрисуночных записей через точку
@@ -100,7 +103,7 @@
 \renewcommand{\cftsecfont}{\hspace{0pt}}            % Имена секций в содержании не жирным шрифтом
 \renewcommand\cftsecleader{\cftdotfill{\cftdotsep}} % Точки для секций в содержании
 \renewcommand\cftsecpagefont{\mdseries}             % Номера страниц не жирные
-\setcounter{tocdepth}{3}                            % Глубина оглавления, до subsubsection
+\setcounter{tocdepth}{3}                            % Глубина оглавления, до subsubsubsection
 
 % Нумерация страниц справа сверху
 \usepackage{fancyhdr}
@@ -122,6 +125,7 @@
 \DeclareCaptionLabelSeparator{defffis}{ -- } % Разделитель
 \captionsetup[figure]{justification=centering, labelsep=defffis, format=plain} % Подпись рисунка по центру
 \captionsetup[table]{justification=raggedright, labelsep=defffis, format=plain, singlelinecheck=false} % Подпись таблицы слева
+\captionsetup[longtable]{justification=raggedright, labelsep=defffis, format=plain, singlelinecheck=false} % Подпись таблицы слева
 \addto\captionsrussian{\renewcommand{\figurename}{Рис.}} % Имя фигуры
 
 % Пользовательские функции
@@ -176,6 +180,7 @@
 \titleformat{\section}{}{}{12.5mm}{\centering{\thesection\quad\MakeTextUppercase{#1}}\vspace{1.5em}}
 \titleformat{\subsection}[block]{\vspace{1em}}{}{12.5mm}{\thesubsection\quad#1\vspace{1em}}
 \titleformat{\subsubsection}[block]{\vspace{1em}\normalsize}{}{12.5mm}{\thesubsubsection\quad#1\vspace{1em}}
+\titleformat{\subsubsubsection}[block]{\vspace{1em}\normalsize}{}{12.5mm}{\thesubsubsubsection\quad#1\vspace{1em}}
 \titleformat{\paragraph}[block]{\normalsize}{}{12.5mm}{\MakeTextUppercase{#1}}
 
 % Секции без номеров (введение, заключение...), вместо section*{}
@@ -229,4 +234,4 @@
 \makeatother
 
 \usepackage{lastpage} % Подсчет количества страниц
-\setcounter{page}{4} % Начало нумерации страниц
+\setcounter{page}{3} % Начало нумерации страниц
