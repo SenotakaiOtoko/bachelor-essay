@@ -1,0 +1,1331 @@
+\newcommand{\bdot}{\(\bullet\hspace{0.5em}\)}
+
+\begin{table}[H]
+\caption{CRC карточка класса ImageProcessServiceApplication}\label{crc-table-1}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{ImageProcessServiceApplication} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+\multirow{2}{=}{ main класс } 
+& \bdot ColorProperties \\
+& \bdot FileStorageProperties \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса OnRegistrationCompleteEvent}\label{crc-table-2}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class & ApplicationEvent \\
+\multicolumn{2}{|c|}{OnRegistrationCompleteEvent} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Событие - завершение регистрации  & \bdot FileStorageProperties \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса RegistrationListener}\label{crc-table-3}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class & ApplicationListener \\
+\multicolumn{2}{|c|}{RegistrationListener} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+\multirow{3}{=}{ Слушатель событий регистрации } 
+& \bdot UserAccount \\
+& \bdot OnRegistrationCompleteEvent \\
+& \bdot IUserService \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса ColorUtils}\label{crc-table-4}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{ColorUtils} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Утилиты по работе с цветами  & \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса }\label{crc-table-5}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline enum &  \\
+\multicolumn{2}{|c|}{} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Провайдер аутентификации  & \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса RandomString}\label{crc-table-6}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{RandomString} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Утилита для генерации случайных строк заданной длины  & \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса FileStorageProperties}\label{crc-table-7}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{FileStorageProperties} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Настройки файлового хранилища сервиса  & \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса ColorProperties}\label{crc-table-8}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{ColorProperties} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Настройки сервиса при цветовой кластеризации  & \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса SessionListenerWithMetrics}\label{crc-table-9}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class & HttpSessionListener \\
+\multicolumn{2}{|c|}{SessionListenerWithMetrics} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Слушатель сессий, отвечающий за метрику  & \bdot IUserService \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса PasswordDto}\label{crc-table-10}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{PasswordDto} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  DTO - старый + новый пароль  & \bdot IUserService \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса PixelPoint}\label{crc-table-11}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class & Clusterable \\
+\multicolumn{2}{|c|}{PixelPoint} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Центр кластера  & \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса TagDto}\label{crc-table-12}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{TagDto} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  DTO - тег  & \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса ColorTreemapNode}\label{crc-table-13}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{ColorTreemapNode} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  DTO - узел Treemap  & \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса UserDto}\label{crc-table-14}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{UserDto} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+\multirow{3}{=}{ DTO - пользователь } 
+& \bdot PasswordMatches \\
+& \bdot ValidEmail \\
+& \bdot ValidPassword \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса ColorCluster}\label{crc-table-15}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{ColorCluster} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  DTO - цветовой кластер  & \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса GenericResponse}\label{crc-table-16}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{GenericResponse} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Общий ответ  & \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса PhotoController}\label{crc-table-17}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{PhotoController} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Контроллер доступа к фотографиям  & \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса ColorsController}\label{crc-table-18}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{ColorsController} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+\multirow{4}{=}{ Контроллер цветов } 
+& \bdot PhotoGroupColorArea \\
+& \bdot ColorTreemapNodeMapper \\
+& \bdot ColorsService \\
+& \bdot ColorTreemapNode \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса AuthController}\label{crc-table-19}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{AuthController} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Контроллер  аутентификации  & \bdot ColorTreemapNode \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса RegistrationController}\label{crc-table-20}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{RegistrationController} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+\multirow{12}{=}{ Контроллер регистрации } 
+& \bdot UserAccount \\
+& \bdot VerificationToken \\
+& \bdot OnRegistrationCompleteEvent \\
+& \bdot IUserService \\
+& \bdot ISecurityUserService \\
+& \bdot PasswordDto \\
+& \bdot UserDto \\
+& \bdot InvalidOldPasswordException \\
+& \bdot GenericResponse \\
+& \bdot UserService \\
+& \bdot PasswordResetToken \\
+& \bdot Privilege \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса TagsController}\label{crc-table-21}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{TagsController} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+\multirow{5}{=}{ Контроллер доступа к тегам } 
+& \bdot ColorTreemapNodeMapper \\
+& \bdot PhotoGroupColorArea \\
+& \bdot TagsService \\
+& \bdot ColorTreemapNode \\
+& \bdot TagDto \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса FileController}\label{crc-table-22}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{FileController} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+\multirow{3}{=}{ Контроллер доступа к файлам } 
+& \bdot UserDetailService \\
+& \bdot GenericResponse \\
+& \bdot FileStorageService \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса UserController}\label{crc-table-23}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{UserController} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Контроллер пользователей  & \bdot FileStorageService \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса ReCaptchaUnavailableException}\label{crc-table-24}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class & RuntimeException \\
+\multicolumn{2}{|c|}{ReCaptchaUnavailableException} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Каптча недоступна  & \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса UserAlreadyExistException}\label{crc-table-25}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class & RuntimeException \\
+\multicolumn{2}{|c|}{UserAlreadyExistException} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Пользователь уже существует  & \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса UserNotFoundException}\label{crc-table-26}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class & RuntimeException \\
+\multicolumn{2}{|c|}{UserNotFoundException} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Пользователь не найден  & \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса InvalidOldPasswordException}\label{crc-table-27}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class & RuntimeException \\
+\multicolumn{2}{|c|}{InvalidOldPasswordException} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Исключение возникает при неверно введенном старом пароле  & \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса RestResponseEntityExceptionHandler}\label{crc-table-28}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class & ResponseEntityExceptionHandler \\
+\multicolumn{2}{|c|}{RestResponseEntityExceptionHandler} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+\multirow{6}{=}{ REST обработчик ответов } 
+& \bdot GenericResponse \\
+& \bdot InvalidOldPasswordException \\
+& \bdot ReCaptchaInvalidException \\
+& \bdot UserNotFoundException \\
+& \bdot UserAlreadyExistException \\
+& \bdot ReCaptchaUnavailableException \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса ReCaptchaInvalidException}\label{crc-table-29}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class & RuntimeException \\
+\multicolumn{2}{|c|}{ReCaptchaInvalidException} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Исключение возникает при неверно введенной каптче  & \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса ColorTreemapNodeMapper}\label{crc-table-30}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{ColorTreemapNodeMapper} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+\multirow{2}{=}{  Маппит сущности БД типа PhotoGroupColorArea в узлы ColorTreemap } 
+& \bdot PhotoGroupColorArea \\
+& \bdot ColorTreemapNode \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса TagRepository}\label{crc-table-31}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline interface & JpaRepository \\
+\multicolumn{2}{|c|}{TagRepository} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Репозиторий с тегами  & \bdot ColorTreemapNode \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса PhotoGroupRepository}\label{crc-table-32}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline interface & JpaRepository \\
+\multicolumn{2}{|c|}{PhotoGroupRepository} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Репозиторий с группами фотографий  & \bdot ColorTreemapNode \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса PhotoGroupColorAreaRepository}\label{crc-table-33}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline interface & JpaRepository \\
+\multicolumn{2}{|c|}{PhotoGroupColorAreaRepository} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+\multirow{2}{=}{ Репозиторий с цветовыми кластерами } 
+& \bdot PhotoGroup \\
+& \bdot PhotoGroupColorArea \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса PhotoGroupMetadataRepository}\label{crc-table-34}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline interface & JpaRepository \\
+\multicolumn{2}{|c|}{PhotoGroupMetadataRepository} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Репозиторий с метаданными фотографий  & \bdot PhotoGroupColorArea \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса PhotoGroupTagRepository}\label{crc-table-35}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline interface & JpaRepository \\
+\multicolumn{2}{|c|}{PhotoGroupTagRepository} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+\multirow{2}{=}{ Репозиторий с тегами группы фотографий } 
+& \bdot PhotoGroup \\
+& \bdot PhotoGroupTag \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса WorldNetClassRepository}\label{crc-table-36}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline interface & JpaRepository \\
+\multicolumn{2}{|c|}{WorldNetClassRepository} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Репозиторий с классами WorldNet  & \bdot PhotoGroupTag \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса PhotoSingleRepository}\label{crc-table-37}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline interface & JpaRepository \\
+\multicolumn{2}{|c|}{PhotoSingleRepository} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+\multirow{3}{=}{  Репозиторий с фотографиями } 
+& \bdot PhotoGroup \\
+& \bdot PhotoSingle \\
+& \bdot PhotoType \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса RoleRepository}\label{crc-table-38}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline interface & JpaRepository \\
+\multicolumn{2}{|c|}{RoleRepository} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Репозиторий с ролями пользователей  & \bdot PhotoType \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса UserRepository}\label{crc-table-39}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline interface & JpaRepository \\
+\multicolumn{2}{|c|}{UserRepository} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Репозиторий с пользователями  & \bdot PhotoType \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса PasswordResetTokenRepository}\label{crc-table-40}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline interface & JpaRepository \\
+\multicolumn{2}{|c|}{PasswordResetTokenRepository} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+\multirow{2}{=}{ Репозиторий с токенами для восстановления паролей } 
+& \bdot PasswordResetToken \\
+& \bdot UserAccount \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса VerificationTokenRepository}\label{crc-table-41}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline interface & JpaRepository \\
+\multicolumn{2}{|c|}{VerificationTokenRepository} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+\multirow{2}{=}{ Репозиторий с токенами для верификации } 
+& \bdot UserAccount \\
+& \bdot VerificationToken \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса PrivilegeRepository}\label{crc-table-42}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline interface & JpaRepository \\
+\multicolumn{2}{|c|}{PrivilegeRepository} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Репозиторий с правами пользователей  & \bdot VerificationToken \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса Post}\label{crc-table-43}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{Post} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+\multirow{2}{=}{ Пост } 
+& \bdot UserAccount \\
+& \bdot PrivacyType \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса PhotoType}\label{crc-table-44}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline enum &  \\
+\multicolumn{2}{|c|}{PhotoType} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Тип фотоографии  & \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса PasswordResetToken}\label{crc-table-45}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{PasswordResetToken} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Токен для сброса пароля  & \bdot PrivacyType \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса PhotoSingle}\label{crc-table-46}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{PhotoSingle} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+\multirow{2}{=}{ Фотография } 
+& \bdot PhotoGroup \\
+& \bdot PhotoType \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса PhotoGroup}\label{crc-table-47}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{PhotoGroup} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+\multirow{2}{=}{ Группа фотографий } 
+& \bdot UserAccount \\
+& \bdot PrivacyType \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса PhotoGroupMetadata}\label{crc-table-48}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{PhotoGroupMetadata} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+\multirow{2}{=}{ Метаданные о фотографии } 
+& \bdot PhotoGroup \\
+& \bdot Camera \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса PrivacyType}\label{crc-table-49}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline enum &  \\
+\multicolumn{2}{|c|}{PrivacyType} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Тип access листа  & \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса Tag}\label{crc-table-50}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{Tag} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Тег  & \bdot Camera \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса Privilege}\label{crc-table-51}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{Privilege} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Право пользователя  & \bdot Camera \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса PostUserLike}\label{crc-table-52}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{PostUserLike} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+\multirow{2}{=}{ Лайк посту } 
+& \bdot Post \\
+& \bdot UserAccount \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса PhotoGroupColorArea}\label{crc-table-53}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{PhotoGroupColorArea} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Цветовой кластер  & \bdot UserAccount \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса PhotoGroupUserAccess}\label{crc-table-54}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{PhotoGroupUserAccess} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+\multirow{2}{=}{ Запись в access листе } 
+& \bdot PhotoGroup \\
+& \bdot UserAccount \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса PhotoGroupPost}\label{crc-table-55}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{PhotoGroupPost} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+\multirow{2}{=}{ Связь группа фотографий-пост } 
+& \bdot PhotoGroup \\
+& \bdot Post \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса PhotoGroupTag}\label{crc-table-56}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{PhotoGroupTag} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+\multirow{2}{=}{ Тег фотографии } 
+& \bdot PhotoGroup \\
+& \bdot Tag \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса PostTag}\label{crc-table-57}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{PostTag} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+\multirow{2}{=}{ Тег поста } 
+& \bdot Post \\
+& \bdot Tag \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса VerificationToken}\label{crc-table-58}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{VerificationToken} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Токен для верификации  & \bdot Tag \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса WorldNetClass}\label{crc-table-59}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{WorldNetClass} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Класс WorldNet  & \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса Comment}\label{crc-table-60}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{Comment} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+\multirow{2}{=}{ Комментарий пользователя } 
+& \bdot UserAccount \\
+& \bdot PhotoGroup \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса UserAuthCookie}\label{crc-table-61}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{UserAuthCookie} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Куки пользователя  & \bdot PhotoGroup \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса Role}\label{crc-table-62}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{Role} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+\multirow{2}{=}{ Роль пользователя } 
+& \bdot UserAccount \\
+& \bdot Privilege \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса Camera}\label{crc-table-63}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{Camera} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Фотокамера  & \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса PhotoGroupUserLike}\label{crc-table-64}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{PhotoGroupUserLike} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+\multirow{2}{=}{ Лайк фотографии } 
+& \bdot PhotoGroup \\
+& \bdot UserAccount \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса UserAccount}\label{crc-table-65}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{UserAccount} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Аккаунт пользователя  & \bdot UserAccount \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса IUserService}\label{crc-table-66}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline interface &  \\
+\multicolumn{2}{|c|}{IUserService} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+\multirow{5}{=}{ Интерфейс пользовательского сервиса } 
+& \bdot PasswordResetToken \\
+& \bdot UserAccount \\
+& \bdot VerificationToken \\
+& \bdot UserDto \\
+& \bdot UserAlreadyExistException \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса ImageColorClusteriserService}\label{crc-table-67}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{ImageColorClusteriserService} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+\multirow{2}{=}{ Сервис кластеризации } 
+& \bdot ColorCluster \\
+& \bdot PixelPoint \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса FileStorageService}\label{crc-table-68}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{FileStorageService} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+\multirow{10}{=}{ Файловый сервис } 
+& \bdot FileStorageException \\
+& \bdot MyFileNotFoundException \\
+& \bdot PhotoGroup \\
+& \bdot PhotoSingle \\
+& \bdot PhotoType \\
+& \bdot UserAccount \\
+& \bdot FileStorageProperties \\
+& \bdot PhotoGroupRepository \\
+& \bdot PhotoSingleRepository \\
+& \bdot RandomString \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса UserService}\label{crc-table-69}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class & IUserService \\
+\multicolumn{2}{|c|}{UserService} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+\multirow{9}{=}{ Сервис пользователей } 
+& \bdot PasswordResetTokenRepository \\
+& \bdot RoleRepository \\
+& \bdot UserRepository \\
+& \bdot VerificationTokenRepository \\
+& \bdot PasswordResetToken \\
+& \bdot UserAccount \\
+& \bdot VerificationToken \\
+& \bdot UserDto \\
+& \bdot UserAlreadyExistException \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса TagsService}\label{crc-table-70}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{TagsService} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+\multirow{7}{=}{ Сервис тегов } 
+& \bdot PhotoGroupRepository \\
+& \bdot PhotoGroupTagRepository \\
+& \bdot TagRepository \\
+& \bdot PhotoGroup \\
+& \bdot PhotoGroupTag \\
+& \bdot TagDto \\
+& \bdot Tag \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса ColorsService}\label{crc-table-71}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{ColorsService} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+\multirow{4}{=}{ Сервис для работы с цветами и кластерами } 
+& \bdot PhotoGroup \\
+& \bdot PhotoGroupColorArea \\
+& \bdot PhotoGroupColorAreaRepository \\
+& \bdot PhotoGroupRepository \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса MetadataService}\label{crc-table-72}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{MetadataService} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+\multirow{2}{=}{ Сервис метаданных } 
+& \bdot PhotoGroupMetadata \\
+& \bdot PhotoGroupMetadataRepository \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса PhotoProcessorService}\label{crc-table-73}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{PhotoProcessorService} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+\multirow{20}{=}{ Сервис обработки фотографий (содержит все задания по обработке) } 
+& \bdot PhotoGroupTagRepository \\
+& \bdot TagRepository \\
+& \bdot WorldNetClassRepository \\
+& \bdot PhotoGroupTag \\
+& \bdot Tag \\
+& \bdot WorldNetClass \\
+& \bdot ImageClassifier \\
+& \bdot Label \\
+& \bdot PhotoGroupColorAreaRepository \\
+& \bdot PhotoGroupMetadataRepository \\
+& \bdot PhotoGroupRepository \\
+& \bdot PhotoSingleRepository \\
+& \bdot PhotoGroup \\
+& \bdot PhotoGroupColorArea \\
+& \bdot PhotoSingle \\
+& \bdot PhotoType \\
+& \bdot ColorCluster \\
+& \bdot ColorUtils \\
+& \bdot FileStorageService \\
+& \bdot ImageColorClusteriserService \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса MySimpleUrlAuthenticationSuccessHandler}\label{crc-table-74}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class & AuthenticationSuccessHandler \\
+\multicolumn{2}{|c|}{MySimpleUrlAuthenticationSuccessHandler} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Обработчик аутентификации  & \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса ISecurityUserService}\label{crc-table-75}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline interface &  \\
+\multicolumn{2}{|c|}{ISecurityUserService} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Интерфейс сервиса безопасности пользователей  & \bdot ImageColorClusteriserService \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса SessionFilter}\label{crc-table-76}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class & Filter \\
+\multicolumn{2}{|c|}{SessionFilter} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Фильтр сессий  & \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса UserSecurityService}\label{crc-table-77}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class & ISecurityUserService \\
+\multicolumn{2}{|c|}{UserSecurityService} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+\multirow{3}{=}{ Сервис безопасности пользователей } 
+& \bdot PasswordResetTokenRepository \\
+& \bdot PasswordResetToken \\
+& \bdot UserAccount \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса ImageClassifier}\label{crc-table-78}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{ImageClassifier} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+\multirow{2}{=}{ Классификатор изображений } 
+& \bdot Prediction \\
+& \bdot Label \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса Label}\label{crc-table-79}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class & Comparable \\
+\multicolumn{2}{|c|}{Label} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  POJO, возвращающий вероятность принадлежности к классу и класс  & \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса KerasInceptionV3Net}\label{crc-table-80}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{KerasInceptionV3Net} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Класс нейронной сети  & \bdot Label \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса Prediction}\label{crc-table-81}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{Prediction} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Предположение нейронной сети  & \bdot Label \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса UserDetailService}\label{crc-table-82}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{UserDetailService} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+\multirow{5}{=}{ Хранит пользователя текущей сессии } 
+& \bdot CurrentUser \\
+& \bdot UserRepository \\
+& \bdot Privilege \\
+& \bdot Role \\
+& \bdot UserAccount \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса MetricRegistrySingleton}\label{crc-table-83}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{MetricRegistrySingleton} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Выводит информацию о текущих сессиях в лог  & \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса FileStorageException}\label{crc-table-84}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class & RuntimeException \\
+\multicolumn{2}{|c|}{FileStorageException} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Исключение в файловом хранилище  & \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса MyFileNotFoundException}\label{crc-table-85}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class & RuntimeException \\
+\multicolumn{2}{|c|}{MyFileNotFoundException} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+   Исключение при отсутствующем файле. Возвращает код 404  & \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса CurrentUser}\label{crc-table-86}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class & User \\
+\multicolumn{2}{|c|}{CurrentUser} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Класс пользователя, связанныый с пользователем из БД для сессии  & \bdot UserAccount \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса UserValidator}\label{crc-table-87}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class & Validator \\
+\multicolumn{2}{|c|}{UserValidator} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Валидатор пользователя при регистрации  & \bdot UserAccount \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса ValidPassword}\label{crc-table-88}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline interface &  \\
+\multicolumn{2}{|c|}{ValidPassword} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Валидатор пароля  & \bdot UserAccount \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса EmailValidator}\label{crc-table-89}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class & ConstraintValidator \\
+\multicolumn{2}{|c|}{EmailValidator} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Валидатор email  & \bdot UserAccount \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса PasswordMatches}\label{crc-table-90}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline interface &  \\
+\multicolumn{2}{|c|}{PasswordMatches} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Матчер для формы повторного ввода паролей  & \bdot UserAccount \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса ValidEmail}\label{crc-table-91}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline interface &  \\
+\multicolumn{2}{|c|}{ValidEmail} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Валидатор email  & \bdot UserAccount \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса EmailExistsException}\label{crc-table-92}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class & Throwable \\
+\multicolumn{2}{|c|}{EmailExistsException} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Исключение при уже существующем пользователе с данным email  & \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса PasswordMatchesValidator}\label{crc-table-93}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class & ConstraintValidator \\
+\multicolumn{2}{|c|}{PasswordMatchesValidator} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+\multirow{2}{=}{ Валидатор для формы повторного ввода праоля } 
+& \bdot UserDto \\
+& \bdot PasswordMatches \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса PasswordConstraintValidator}\label{crc-table-94}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class & ConstraintValidator \\
+\multicolumn{2}{|c|}{PasswordConstraintValidator} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Валидатор паролей  & \bdot PasswordMatches \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса ServiceConfig}\label{crc-table-95}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class &  \\
+\multicolumn{2}{|c|}{ServiceConfig} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Конфигурационный файл всех сервисов  & \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса SecSecurityConfig}\label{crc-table-96}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class & WebSecurityConfigurerAdapter \\
+\multicolumn{2}{|c|}{SecSecurityConfig} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+  Конфигурационный файл Spring security  & \bdot PasswordMatches \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса MvcConfig}\label{crc-table-97}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class & WebMvcConfigurer \\
+\multicolumn{2}{|c|}{MvcConfig} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+\multirow{2}{=}{ Конфигурационный файл MVC spring } 
+& \bdot EmailValidator \\
+& \bdot PasswordMatchesValidator \\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{CRC карточка класса SetupDataLoader}\label{crc-table-last}
+\begin{tabular}{|p{8cm} p{8cm}|} 
+\hline class & ApplicationListener \\
+\multicolumn{2}{|c|}{SetupDataLoader} \\ \hline
+\end{tabular}
+\begin{tabular}{|p{8cm}|p{8cm}|} 
+\multirow{6}{=}{ Инициализатор данных при запуске сервиса } 
+& \bdot PrivilegeRepository \\
+& \bdot RoleRepository \\
+& \bdot UserRepository \\
+& \bdot Privilege \\
+& \bdot Role \\
+& \bdot UserAccount \\
+\hline 
+\end{tabular}
+\end{table}

@@ -7,6 +7,9 @@
 
 \usepackage{setspace} % Задание межстрочного интервала
 
+\usepackage{pdflscape}
+\usepackage{rotating}
+
 \usepackage{listings} % Оформление исходного кода
 \lstset{
     basicstyle=\small\ttfamily, % Размер и тип шрифта
@@ -16,6 +19,7 @@
 }
 
 % Шрифты, xelatex
+\usepackage{anyfontsize}
 \defaultfontfeatures{Ligatures=TeX}
 \setmainfont{Times New Roman} % Нормоконтроллеры хотят именно его
 \newfontfamily\cyrillicfont{Times New Roman}
@@ -87,15 +91,22 @@
 
 % Списки
 \usepackage{enumitem}
-\setlist[enumerate,itemize]{wide=\parindent,leftmargin=12.7mm} % Отступы в списках
+\setlist[enumerate,itemize]{wide=\parindent} % Отступы в списках
 
 \makeatletter
-    \AddEnumerateCounter{\asbuk}{\@asbuk}{м)}
+    \AddEnumerateCounter{\asbuk}{\@asbuk}{м)} %\asbuk
 \makeatother
 \setlist{nolistsep} % Нет отступов между пунктами списка
 \renewcommand{\labelitemi}{--} % Маркет списка --
 \renewcommand{\labelenumi}{\asbuk{enumi})} % Список второго уровня
 \renewcommand{\labelenumii}{\arabic{enumii})} % Список третьего уровня
+\renewcommand{\labelenumi}{\theenumi.}
+%\renewcommand{}{}
+
+% Таблицы
+\usepackage{bigstrut}
+\newcommand{\smalltable}{\fontsize{10}{12}\selectfont}
+\newcommand*{\thead}[1]{\multicolumn{1}{c}{\bfseries #1}}
 
 % Содержание
 \usepackage{tocloft}
@@ -103,6 +114,8 @@
 \renewcommand{\cftsecfont}{\hspace{0pt}}            % Имена секций в содержании не жирным шрифтом
 \renewcommand\cftsecleader{\cftdotfill{\cftdotsep}} % Точки для секций в содержании
 \renewcommand\cftsecpagefont{\mdseries}             % Номера страниц не жирные
+%\renewcommand\cftsecafterpnum{\vskip0pt}
+\renewcommand\cftbeforesecskip{\vskip0pt}           % Отсутп перед названием секции
 \setcounter{tocdepth}{3}                            % Глубина оглавления, до subsubsubsection
 
 % Нумерация страниц справа сверху
@@ -177,7 +190,7 @@
 
 % Оформление заголовков
 \usepackage[compact,explicit]{titlesec}
-\titleformat{\section}{}{}{12.5mm}{\centering{\thesection\quad\MakeTextUppercase{#1}}\vspace{1.5em}}
+\titleformat{\section}{}{}{12.5mm}{\centering{\thesection\quad\MakeTextUppercase{#1}}}%\vspace{1.5em}}
 \titleformat{\subsection}[block]{\vspace{1em}}{}{12.5mm}{\thesubsection\quad#1\vspace{1em}}
 \titleformat{\subsubsection}[block]{\vspace{1em}\normalsize}{}{12.5mm}{\thesubsubsection\quad#1\vspace{1em}}
 \titleformat{\subsubsubsection}[block]{\vspace{1em}\normalsize}{}{12.5mm}{\thesubsubsubsection\quad#1\vspace{1em}}
@@ -186,7 +199,7 @@
 % Секции без номеров (введение, заключение...), вместо section*{}
 \newcommand{\anonsection}[1]{
     \phantomsection % Корректный переход по ссылкам в содержании
-    \paragraph{\centerline{{#1}}\vspace{1.5em}}
+    \paragraph{\centerline{{#1}}}%\vspace{1.5em}}
     \addcontentsline{toc}{section}{\uppercase{#1}}
 }
 
@@ -199,7 +212,7 @@
 
 % Секция для аннотации (она не включается в содержание)
 \newcommand{\annotation}[1]{
-    \paragraph{\centerline{{#1}}\vspace{1em}}
+    \paragraph{\centerline{{#1}}}%\vspace{1em}}
 }
 
 % Секция для списка иллюстративного материала
