@@ -247,7 +247,7 @@ ImageNet использует вариант семантической сети
 \subsection{RESTful api сервиса}
 
 \begin{table}[H]
-  \caption{api контроллера аутентификации}\label{use-case-15-table}
+  \caption{api контроллера аутентификации}\label{api-auth-table}
   \begin{tabular}{|p{6cm}|p{10cm}|}
   \hline \multicolumn{2}{|l|}{GET /login} \\
   \hline \multicolumn{2}{|c|}{Параметры} \\
@@ -265,7 +265,7 @@ ImageNet использует вариант семантической сети
 \end{table}
 
 \begin{table}[H]
-  \caption{api контроллера цветовой индексации}\label{use-case-15-table}
+  \caption{api контроллера цветовой индексации}\label{api-colors-table}
   \begin{tabular}{|p{6cm}|p{10cm}|}
   \hline \multicolumn{2}{|l|}{GET /colors/\{uuid\}} \\
   \hline \multicolumn{2}{|c|}{Параметры} \\
@@ -275,10 +275,10 @@ ImageNet использует вариант семантической сети
   \hline Код & Описание \\
   \hline \multirow{2}{=}{200} & ОК \\
    & Пример возвращаемого значения: "[ \\
-   & {
-   &   "hexColor": "string",
-   &   "nodeValue": 0
-   & }
+   & \{ \\
+   &   "hexColor": "string", \\
+   &   "nodeValue": 0 \\
+   & \} \\
    & ]"\\
   \hline 401 & Для доступа к запрашиваемому ресурсу требуется аутентификация \\
   \hline 403 & Клиент не уполномочен совершать операции с запрошенным ресурсом \\
@@ -288,7 +288,7 @@ ImageNet использует вариант семантической сети
 \end{table}
 
 \begin{table}[H]
-  \caption{api контроллера файлов}\label{use-case-15-table}
+  \caption{api контроллера файлов}\label{api-files-table}
   \begin{tabular}{|p{6cm}|p{10cm}|}
   \hline \multicolumn{2}{|l|}{GET /file/\{uuid\}} \\
   \hline \multicolumn{2}{|c|}{Параметры} \\
@@ -297,7 +297,7 @@ ImageNet использует вариант семантической сети
   \hline photoType & Тип фотографии (оригинал, превью) \\
   \hline \multicolumn{2}{|c|}{Ответы} \\
   \hline Код & Описание \\
-  \hline \multirow{2}{=}{200} & ОК \\
+  \hline \multirow{1}{=}{200} & ОК \\
   \hline 401 & Для доступа к запрашиваемому ресурсу требуется аутентификация \\
   \hline 403 & Клиент не уполномочен совершать операции с запрошенным ресурсом \\
   \hline 404 & Запрашиваемый ресурс не найден \\
@@ -307,13 +307,22 @@ ImageNet использует вариант семантической сети
   \hline file & Загружаемая на сервер фотография \\
   \hline \multicolumn{2}{|c|}{Ответы} \\
   \hline Код & Описание \\
-  \hline \multirow{2}{=}{200} & ОК \\
+  \hline \multirow{7}{=}{200} & ОК \\
    & Пример возвращаемого значения: \\
-   & {
-   & "error": {},
-   & "result": {},
-   & "status": 0
-   & }
+   & \{ \\
+   & "error": \{\}, \\
+   & "result": \{\}, \\
+   & "status": 0 \\
+   & \} \\
+  \hline
+  \end{tabular}
+\end{table}
+\begin{table}[H]
+  \caption*{Продолжение таблицы \ref{api-files-table}}
+  \begin{tabular}{|p{6cm}|p{10cm}|}
+  \hline \multicolumn{2}{|l|}{POST /file} \\
+  \hline \multicolumn{2}{|c|}{Ответы} \\
+  \hline Код & Описание \\
   \hline 401 & Для доступа к запрашиваемому ресурсу требуется аутентификация \\
   \hline 403 & Клиент не уполномочен совершать операции с запрошенным ресурсом \\
   \hline 404 & Запрашиваемый ресурс не найден \\
@@ -322,7 +331,7 @@ ImageNet использует вариант семантической сети
 \end{table}
 
 \begin{table}[H]
-  \caption{api контроллера фотографий}\label{use-case-15-table}
+  \caption{api контроллера фотографий}\label{api-photos-table}
   \begin{tabular}{|p{6cm}|p{10cm}|}
   \hline \multicolumn{2}{|l|}{GET /colors/\{uuid\}} \\
   \hline \multicolumn{2}{|c|}{Параметры} \\
@@ -340,7 +349,7 @@ ImageNet использует вариант семантической сети
 \end{table}
 
 \begin{table}[H]
-  \caption{api контроллера регистрации}\label{use-case-15-table}
+  \caption{api контроллера регистрации}\label{api-registration-table}
   \begin{tabular}{|p{6cm}|p{10cm}|}
   \hline \multicolumn{2}{|l|}{GET /registrationConfirm} \\
   \hline \multicolumn{2}{|c|}{Параметры} \\
@@ -356,6 +365,7 @@ ImageNet использует вариант семантической сети
   \hline \multicolumn{2}{|l|}{/user/changePassword} \\
   \hline \multicolumn{2}{|c|}{Параметры} \\
   \hline Название & Описание \\
+  \hline id & Идентификатор пользователя, которому необходимо сменить пароль \\
   \hline token & Токен для подтверждения акаунта, высланный на электронную почту \\
   \hline \multicolumn{2}{|c|}{Ответы} \\
   \hline Код & Описание \\
@@ -367,7 +377,174 @@ ImageNet использует вариант семантической сети
   \hline
   \end{tabular}
 \end{table}
+\begin{table}[H]
+  \caption*{Продолжение таблицы \ref{api-registration-table}}
+  \begin{tabular}{|p{6cm}|p{10cm}|}
+  \hline \multicolumn{2}{|l|}{/user/registration} \\
+  \hline \multicolumn{2}{|c|}{Параметры} \\
+  \hline Название & Описание \\
+  \hline id & Идентификатор пользователя, которому необходимо сменить пароль \\
+  \hline token & Токен для подтверждения акаунта, высланный на электронную почту \\
+  \hline \multicolumn{2}{|c|}{Ответы} \\
+  \hline Код & Описание \\
+  \hline \multirow{6}{=}{200} & ОК \\
+   & Пример возвращаемого значения: \{ \\
+   & "error": \{\}, \\
+   & "result": \{\}, \\
+   & "status": 0 \\
+   & \} \\
+  \hline 401 & Для доступа к запрашиваемому ресурсу требуется аутентификация \\
+  \hline 403 & Клиент не уполномочен совершать операции с запрошенным ресурсом \\
+  \hline 404 & Запрашиваемый ресурс не найден \\
+  \hline
+  \end{tabular}
+\end{table}
+\begin{table}[H]
+  \caption*{Продолжение таблицы \ref{api-registration-table}}
+  \begin{tabular}{|p{6cm}|p{10cm}|}
+  \hline \multicolumn{2}{|l|}{GET /user/resendRegistrationToken} \\
+  \hline \multicolumn{2}{|c|}{Параметры} \\
+  \hline Название & Описание \\
+  \hline token & Токен для подтверждения акаунта, высланный на электронную почту \\
+  \hline \multicolumn{2}{|c|}{Ответы} \\
+  \hline Код & Описание \\
+  \hline \multirow{6}{=}{200} & ОК \\
+   & Пример возвращаемого значения: \{ \\
+   & "error": \{\}, \\
+   & "result": \{\}, \\
+   & "status": 0 \\
+   & \} \\
+  \hline 401 & Для доступа к запрашиваемому ресурсу требуется аутентификация \\
+  \hline 403 & Клиент не уполномочен совершать операции с запрошенным ресурсом \\
+  \hline 404 & Запрашиваемый ресурс не найден \\
+  \hline \multicolumn{2}{|l|}{POST /user/resetPassword} \\
+  \hline \multicolumn{2}{|c|}{Параметры} \\
+  \hline Название & Описание \\
+  \hline email & Адрес электронной почты, на который необходимо выслать токен для сброса пароля \\
+  \hline
+  \end{tabular}
+\end{table}
+\begin{table}[H]
+  \caption*{Продолжение таблицы \ref{api-registration-table}}
+  \begin{tabular}{|p{6cm}|p{10cm}|}
+  \hline \multicolumn{2}{|l|}{POST /user/resetPassword} \\
+  \hline \multicolumn{2}{|c|}{Ответы} \\
+  \hline Код & Описание \\
+  \hline \multirow{6}{=}{200} & ОК \\
+   & Пример возвращаемого значения: \{ \\
+   & "error": \{\}, \\
+   & "result": \{\}, \\
+   & "status": 0 \\
+   & \} \\
+  \hline 401 & Для доступа к запрашиваемому ресурсу требуется аутентификация \\
+  \hline 403 & Клиент не уполномочен совершать операции с запрошенным ресурсом \\
+  \hline 404 & Запрашиваемый ресурс не найден \\
+  \hline \multicolumn{2}{|l|}{POST /user/savePassword} \\
+  \hline \multicolumn{2}{|c|}{Параметры} \\
+  \hline Название & Описание \\
+  \hline newPassword & Новый пароль \\
+  \hline newPasswordConfirm & Новый пароль \\
+  \hline \multicolumn{2}{|c|}{Ответы} \\
+  \hline Код & Описание \\
+  \hline \multirow{6}{=}{200} & ОК \\
+   & Пример возвращаемого значения: \{ \\
+   & "error": \{\}, \\
+   & "result": \{\}, \\
+   & "status": 0 \\
+   & \} \\
+  \hline 401 & Для доступа к запрашиваемому ресурсу требуется аутентификация \\
+  \hline
+  \end{tabular}
+\end{table}
+\begin{table}[H]
+  \caption*{Продолжение таблицы \ref{api-registration-table}}
+  \begin{tabular}{|p{6cm}|p{10cm}|}
+  \hline \multicolumn{2}{|l|}{POST /user/savePassword} \\
+  \hline \multicolumn{2}{|c|}{Ответы} \\
+  \hline Код & Описание \\
+  \hline 403 & Клиент не уполномочен совершать операции с запрошенным ресурсом \\
+  \hline 404 & Запрашиваемый ресурс не найден \\
+  \hline \multicolumn{2}{|l|}{POST /user/update/2fa} \\
+  \hline \multicolumn{2}{|c|}{Параметры} \\
+  \hline Название & Описание \\
+  \hline use2FA & Флаг использования двухфакторинговой авторизации \\
+  \hline \multicolumn{2}{|c|}{Ответы} \\
+  \hline Код & Описание \\
+  \hline \multirow{6}{=}{200} & ОК \\
+   & Пример возвращаемого значения: \{ \\
+   & "error": \{\}, \\
+   & "result": \{\}, \\
+   & "status": 0 \\
+   & \} \\
+  \hline 401 & Для доступа к запрашиваемому ресурсу требуется аутентификация \\
+  \hline 403 & Клиент не уполномочен совершать операции с запрошенным ресурсом \\
+  \hline 404 & Запрашиваемый ресурс не найден \\
+  \hline \multicolumn{2}{|l|}{POST /user/updatePassword} \\
+  \hline \multicolumn{2}{|c|}{Параметры} \\
+  \hline Название & Описание \\
+  \hline oldPassword & Прежний пароль \\
+  \hline newPassword & Новый пароль \\
+  \hline
+  \end{tabular}
+\end{table}
+\begin{table}[H]
+  \caption*{Продолжение таблицы \ref{api-registration-table}}
+  \begin{tabular}{|p{6cm}|p{10cm}|}
+  \hline \multicolumn{2}{|l|}{POST /user/updatePassword} \\
+  \hline \multicolumn{2}{|c|}{Ответы} \\
+  \hline Код & Описание \\
+  \hline \multirow{6}{=}{200} & ОК \\
+   & Пример возвращаемого значения: \{ \\
+   & "error": \{\}, \\
+   & "result": \{\}, \\
+   & "status": 0 \\
+   & \} \\
+  \hline 401 & Для доступа к запрашиваемому ресурсу требуется аутентификация \\
+  \hline 403 & Клиент не уполномочен совершать операции с запрошенным ресурсом \\
+  \hline 404 & Запрашиваемый ресурс не найден \\
+  \hline
+  \end{tabular}
+\end{table}
 
+\begin{table}[H]
+  \caption{api контроллера тегов}\label{use-case-15-table}
+  \begin{tabular}{|p{6cm}|p{10cm}|}
+  \hline \multicolumn{2}{|l|}{GET /tags/\{uuid\}} \\
+  \hline \multicolumn{2}{|c|}{Параметры} \\
+  \hline Название & Описание \\
+  \hline uuid & уникальный идентификатор фотографии, теги которой необходимо получить \\
+  \hline \multicolumn{2}{|c|}{Ответы} \\
+  \hline Код & Описание \\
+  \hline \multirow{7}{=}{200} & ОК \\
+   & Пример возвращаемого значения: [ \\
+   & \{ \\
+   & "name": "string", \\
+   & "value": 0 \\
+   & \} \\
+   & ] \\
+  \hline 401 & Для доступа к запрашиваемому ресурсу требуется аутентификация \\
+  \hline 403 & Клиент не уполномочен совершать операции с запрошенным ресурсом \\
+  \hline 404 & Запрашиваемый ресурс не найден \\
+  \hline
+  \end{tabular}
+\end{table}
 
+\begin{table}[H]
+  \caption{api контроллера пользователей}\label{use-case-15-table}
+  \begin{tabular}{|p{6cm}|p{10cm}|}
+  \hline \multicolumn{2}{|l|}{GET /user/\{id\}} \\
+  \hline \multicolumn{2}{|c|}{Параметры} \\
+  \hline Название & Описание \\
+  \hline id & уникальный идентификатор пользователя, информацию о котором необходимо получить \\
+  \hline \multicolumn{2}{|c|}{Ответы} \\
+  \hline Код & Описание \\
+  \hline \multirow{7}{=}{200} & ОК \\
+   & Пример возвращаемого значения: "string" \\
+  \hline 401 & Для доступа к запрашиваемому ресурсу требуется аутентификация \\
+  \hline 403 & Клиент не уполномочен совершать операции с запрошенным ресурсом \\
+  \hline 404 & Запрашиваемый ресурс не найден \\
+  \hline
+  \end{tabular}
+\end{table}
 
 \clearpage

@@ -68,7 +68,9 @@
 % Оформление библиографии и подрисуночных записей через точку
 \makeatletter
 \renewcommand*{\@biblabel}[1]{\hfill#1.}
-\renewcommand*\l@section{\@dottedtocline{1}{1em}{1em}}
+\renewcommand*\l@section{\@dottedtocline{1}{1em}{1em}
+
+}
 \renewcommand{\thefigure}{\thesection.\arabic{figure}} % Формат рисунка секция.номер
 \renewcommand{\thetable}{\thesection.\arabic{table}} % Формат таблицы секция.номер
 \def\redeflsection{\def\l@section{\@dottedtocline{1}{0em}{10em}}}
@@ -122,7 +124,7 @@
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[C]{\textrm{\thepage \\ 09.03.04.ДП19.501079 34}}
+\fancyhead[C]{\textrm{\thepage \\ 09.03.04.ДП19.101501079 81}}
 \fancyheadoffset{0mm}
 \fancyfootoffset{0mm}
 \setlength{\headheight}{17pt}
@@ -130,7 +132,7 @@
 \renewcommand{\footrulewidth}{0pt}
 \fancypagestyle{plain}{ 
     \fancyhf{}
-    \chead{\thepage \\ 09.03.04.ДП19.501079 34}
+    \chead{\thepage \\ 09.03.04.ДП19.101501079 81}
 }
 
 % Формат подрисуночных надписей
@@ -250,4 +252,38 @@
 
 
 \usepackage{lastpage} % Подсчет количества страниц
-\setcounter{page}{3} % Начало нумерации страниц
+\setcounter{page}{2} % Начало нумерации страниц
+
+\usepackage{etoolbox}
+
+% Подсчет количества рисунков и таблиц
+\newcounter{totfigures}
+\newcounter{tottables}
+\newcounter{totcites}
+
+\providecommand\totfig{} 
+\providecommand\tottab{}
+\providecommand\totcit{}
+
+\makeatletter
+
+% Подсчёт количества рисунков и таблиц
+\renewcommand\section{
+  \addtocounter{totfigures}{\value{figure}}%
+  \addtocounter{tottables}{\value{table}}%
+  \immediate\write\@mainaux{%
+    \string\gdef\string\totfig{\number\value{totfigures}}
+    \string\gdef\string\tottab{\number\value{tottables}}%
+    \string\gdef\string\totcit{\number\value{totcites}}%
+  }%
+  \@startsection{section}{1}{5pt}%
+  {-3.5ex \@plus -1ex \@minus -.2ex}%
+  {2.3ex \@plus.2ex}%
+  {\ifnum \scr@compatibility>\@nameuse{scr@v@2.96}\relax
+    \setlength{\parfillskip}{\z@ plus 1fil}\fi
+    \raggedsection\normalfont\sectfont\nobreak\size@section}%
+}
+
+\makeatother
+\pretocmd{\chapter}{\addtocounter{totfigures}{\value{figure}}\setcounter{figure}{0}}{}{}
+\pretocmd{\chapter}{\addtocounter{tottables}{\value{table}}\setcounter{table}{0}}{}{}
