@@ -100,7 +100,7 @@
 \renewcommand{\labelitemi}{--} % Маркет списка --
 \renewcommand{\labelenumi}{\asbuk{enumi})} % Список второго уровня
 \renewcommand{\labelenumii}{\arabic{enumii})} % Список третьего уровня
-\renewcommand{\labelenumi}{\theenumi.}
+\renewcommand{\labelenumi}{\theenumi)}
 %\renewcommand{}{}
 
 % Таблицы
@@ -110,7 +110,7 @@
 
 % Содержание
 \usepackage{tocloft}
-\renewcommand{\cfttoctitlefont}{\hspace{0.38\textwidth}\MakeTextUppercase} % СОДЕРЖАНИЕ
+\renewcommand{\cfttoctitlefont}{\hspace{0.4\textwidth}\MakeTextUppercase} % СОДЕРЖАНИЕ %
 \renewcommand{\cftsecfont}{\hspace{0pt}}            % Имена секций в содержании не жирным шрифтом
 \renewcommand\cftsecleader{\cftdotfill{\cftdotsep}} % Точки для секций в содержании
 \renewcommand\cftsecpagefont{\mdseries}             % Номера страниц не жирные
@@ -190,7 +190,7 @@
 
 % Оформление заголовков
 \usepackage[compact,explicit]{titlesec}
-\titleformat{\section}{}{}{12.5mm}{\centering{\thesection\quad\MakeTextUppercase{#1}}}%\vspace{1.5em}}
+\titleformat{\section}{}{}{}{\centering{\thesection\quad\MakeTextUppercase{#1}}}%\vspace{1.5em}}
 \titleformat{\subsection}[block]{\vspace{1em}}{}{12.5mm}{\thesubsection\quad#1\vspace{1em}}
 \titleformat{\subsubsection}[block]{\vspace{1em}\normalsize}{}{12.5mm}{\thesubsubsection\quad#1\vspace{1em}}
 \titleformat{\subsubsubsection}[block]{\vspace{1em}\normalsize}{}{12.5mm}{\thesubsubsubsection\quad#1\vspace{1em}}
@@ -243,8 +243,11 @@
             \renewcommand\theenumiv{\@arabic\c@enumiv}
         }
         \setlength{\itemsep}{0pt}
+        \setlength{\parskip}{0pt}
     }
 \makeatother
+% Нет интервалов между библиографиями
+
 
 \usepackage{lastpage} % Подсчет количества страниц
 \setcounter{page}{3} % Начало нумерации страниц
