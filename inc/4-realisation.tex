@@ -1,3 +1,4 @@
+\sectioncounter
 \section{Программная реализация прототипа приложения}
 
 \subsection{Классификация изображений}
@@ -97,11 +98,11 @@ ImageNet использует вариант семантической сети
 Для составления относительно состоятельного рейтинга популярных тегов произведена многократная выборка тегов через связь тег-публикации-теги с помощью api Instagram по поиску популярных публикаций по тегу. 
 Из совокупности выборок составлена и проранжирована база популярных тегов.
 
-\addimghere{instagram-ranged}{0.8}
+\addimghere{instagram-ranged}{0.8}{Проранжированная выборка популярных тегов социальной сети Instagram}
 
 Составив рейтинг из достаточно большого количества тегов, для отбора тегов, относящихся непосредственно к классификации изображений, получено множество на пересечении множества тегов с множеством слов из краткого словесного описания категорий объектов из сети WordNet. 
 
-\addimghere{wordnet-ranged}{0.8}
+\addimghere{wordnet-ranged}{0.8}{Проранжированная выборка категорий WordNet}
 
 В дополнение проранжировано полученное множество категорий по популярности, отсеяны категории, содержащие менее 500 изображений в базе ImageNet для улучшения качества обучающей выборки, и выбраны 1000 наиболее популярных категорий. 
 Получен необходимый набор категорий для обучения нейронной сети. 
@@ -244,10 +245,10 @@ ImageNet использует вариант семантической сети
 Выполнить данную операцию можно почти за линейное время, используя алгоритм Коэна, Ли, Миллера и Пачоки \cite{median-linear}.
 В результате работы алгоритма были получены данные о цветовых характеристиках изображения.
 
-\subsection{RESTful api сервиса}
+\subsection{Api сервиса}
 
 \begin{table}[H]
-  \caption{api контроллера аутентификации}\label{api-auth-table}
+  \caption{Api контроллера аутентификации}\label{api-auth-table}
   \begin{tabular}{|p{6cm}|p{10cm}|}
   \hline \multicolumn{2}{|l|}{GET /login} \\
   \hline \multicolumn{2}{|c|}{Параметры} \\
@@ -265,7 +266,7 @@ ImageNet использует вариант семантической сети
 \end{table}
 
 \begin{table}[H]
-  \caption{api контроллера цветовой индексации}\label{api-colors-table}
+  \caption{Api контроллера цветовой индексации}\label{api-colors-table}
   \begin{tabular}{|p{6cm}|p{10cm}|}
   \hline \multicolumn{2}{|l|}{GET /colors/\{uuid\}} \\
   \hline \multicolumn{2}{|c|}{Параметры} \\
@@ -288,7 +289,7 @@ ImageNet использует вариант семантической сети
 \end{table}
 
 \begin{table}[H]
-  \caption{api контроллера файлов}\label{api-files-table}
+  \caption{Api контроллера файлов}\label{api-files-table}
   \begin{tabular}{|p{6cm}|p{10cm}|}
   \hline \multicolumn{2}{|l|}{GET /file/\{uuid\}} \\
   \hline \multicolumn{2}{|c|}{Параметры} \\
@@ -314,11 +315,10 @@ ImageNet использует вариант семантической сети
    & "result": \{\}, \\
    & "status": 0 \\
    & \} \\
-  \hline
   \end{tabular}
 \end{table}
 \begin{table}[H]
-  \caption*{Продолжение таблицы \ref{api-files-table}}
+  \caption*{Окончание таблицы \ref{api-files-table}}
   \begin{tabular}{|p{6cm}|p{10cm}|}
   \hline \multicolumn{2}{|l|}{POST /file} \\
   \hline \multicolumn{2}{|c|}{Ответы} \\
@@ -331,7 +331,7 @@ ImageNet использует вариант семантической сети
 \end{table}
 
 \begin{table}[H]
-  \caption{api контроллера фотографий}\label{api-photos-table}
+  \caption{Api контроллера фотографий}\label{api-photos-table}
   \begin{tabular}{|p{6cm}|p{10cm}|}
   \hline \multicolumn{2}{|l|}{GET /colors/\{uuid\}} \\
   \hline \multicolumn{2}{|c|}{Параметры} \\
@@ -349,7 +349,7 @@ ImageNet использует вариант семантической сети
 \end{table}
 
 \begin{table}[H]
-  \caption{api контроллера регистрации}\label{api-registration-table}
+  \caption{Api контроллера регистрации}\label{api-registration-table}
   \begin{tabular}{|p{6cm}|p{10cm}|}
   \hline \multicolumn{2}{|l|}{GET /registrationConfirm} \\
   \hline \multicolumn{2}{|c|}{Параметры} \\
@@ -374,7 +374,6 @@ ImageNet использует вариант семантической сети
   \hline 401 & Для доступа к запрашиваемому ресурсу требуется аутентификация \\
   \hline 403 & Клиент не уполномочен совершать операции с запрошенным ресурсом \\
   \hline 404 & Запрашиваемый ресурс не найден \\
-  \hline
   \end{tabular}
 \end{table}
 \begin{table}[H]
@@ -396,7 +395,6 @@ ImageNet использует вариант семантической сети
   \hline 401 & Для доступа к запрашиваемому ресурсу требуется аутентификация \\
   \hline 403 & Клиент не уполномочен совершать операции с запрошенным ресурсом \\
   \hline 404 & Запрашиваемый ресурс не найден \\
-  \hline
   \end{tabular}
 \end{table}
 \begin{table}[H]
@@ -421,7 +419,6 @@ ImageNet использует вариант семантической сети
   \hline \multicolumn{2}{|c|}{Параметры} \\
   \hline Название & Описание \\
   \hline email & Адрес электронной почты, на который необходимо выслать токен для сброса пароля \\
-  \hline
   \end{tabular}
 \end{table}
 \begin{table}[H]
@@ -453,7 +450,6 @@ ImageNet использует вариант семантической сети
    & "status": 0 \\
    & \} \\
   \hline 401 & Для доступа к запрашиваемому ресурсу требуется аутентификация \\
-  \hline
   \end{tabular}
 \end{table}
 \begin{table}[H]
@@ -484,11 +480,10 @@ ImageNet использует вариант семантической сети
   \hline Название & Описание \\
   \hline oldPassword & Прежний пароль \\
   \hline newPassword & Новый пароль \\
-  \hline
   \end{tabular}
 \end{table}
 \begin{table}[H]
-  \caption*{Продолжение таблицы \ref{api-registration-table}}
+  \caption*{Окончание таблицы \ref{api-registration-table}}
   \begin{tabular}{|p{6cm}|p{10cm}|}
   \hline \multicolumn{2}{|l|}{POST /user/updatePassword} \\
   \hline \multicolumn{2}{|c|}{Ответы} \\
@@ -507,7 +502,7 @@ ImageNet использует вариант семантической сети
 \end{table}
 
 \begin{table}[H]
-  \caption{api контроллера тегов}\label{use-case-15-table}
+  \caption{Api контроллера тегов}\label{use-case-15-table}
   \begin{tabular}{|p{6cm}|p{10cm}|}
   \hline \multicolumn{2}{|l|}{GET /tags/\{uuid\}} \\
   \hline \multicolumn{2}{|c|}{Параметры} \\
@@ -530,7 +525,7 @@ ImageNet использует вариант семантической сети
 \end{table}
 
 \begin{table}[H]
-  \caption{api контроллера пользователей}\label{use-case-15-table}
+  \caption{Api контроллера пользователей}\label{use-case-15-table}
   \begin{tabular}{|p{6cm}|p{10cm}|}
   \hline \multicolumn{2}{|l|}{GET /user/\{id\}} \\
   \hline \multicolumn{2}{|c|}{Параметры} \\

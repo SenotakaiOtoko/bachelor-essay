@@ -10,6 +10,8 @@
 \usepackage{pdflscape}
 \usepackage{rotating}
 
+\usepackage{underscore}
+
 \usepackage{listings} % Оформление исходного кода
 \lstset{
     basicstyle=\small\ttfamily, % Размер и тип шрифта
@@ -148,30 +150,32 @@
     \begin{figure}
         \centering
         \includegraphics[width=#2\linewidth]{#1}
-        \caption{#3} \label{#4}
+        \caption{\onehalfspacing #3} \label{#4}
     \end{figure}
 }
 \newcommand{\addimghere}[4]{ % Добавить рисунок непосредственно в это место
     \begin{figure}[H]
         \centering
         \includegraphics[width=#2\linewidth]{#1}
-        \caption{#3} \label{#4}
+        \caption{\onehalfspacing #3} \label{#4}
     \end{figure}
 }
 \newcommand{\addtwoimghere}[5]{ % Вставка двух рисунков
     \begin{figure}[H]
+        \onehalfspacing
         \centering
         \includegraphics[width=#2\linewidth]{#1}
         \hfill
         \includegraphics[width=#3\linewidth]{#2}
-        \caption{#4} \label{#5}
+        \caption{\onehalfspacing #4} \label{#5}
     \end{figure}
 }
 \newcommand{\addimgapp}[2]{ % Это костыль для приложения Б
     \begin{figure}[H]
+        \onehalfspacing
         \centering
         \includegraphics[width=1\linewidth]{#1}
-        \caption*{#2}
+        \caption*{\onehalfspacing #2}
     \end{figure}
 }
 
@@ -268,21 +272,7 @@
 \makeatletter
 
 % Подсчёт количества рисунков и таблиц
-\renewcommand\section{
-  \addtocounter{totfigures}{\value{figure}}%
-  \addtocounter{tottables}{\value{table}}%
-  \immediate\write\@mainaux{%
-    \string\gdef\string\totfig{\number\value{totfigures}}
-    \string\gdef\string\tottab{\number\value{tottables}}%
-    \string\gdef\string\totcit{\number\value{totcites}}%
-  }%
-  \@startsection{section}{1}{5pt}%
-  {-3.5ex \@plus -1ex \@minus -.2ex}%
-  {2.3ex \@plus.2ex}%
-  {\ifnum \scr@compatibility>\@nameuse{scr@v@2.96}\relax
-    \setlength{\parfillskip}{\z@ plus 1fil}\fi
-    \raggedsection\normalfont\sectfont\nobreak\size@section}%
-}
+
 
 \makeatother
 \pretocmd{\chapter}{\addtocounter{totfigures}{\value{figure}}\setcounter{figure}{0}}{}{}
