@@ -1,11 +1,6 @@
-\section{Руководство администратора}
-
-Руководство администратора содержит информацию о развертывании и настройке окружения и программного обеспечения на сервере, информацию о поддержании.
-
-
 \section{Аппаратное обеспечение}
 \subsection{Системные требования}
-В состав технических средств по обеспечению работы сервиса для обслуживания одновременно до 500 пользователей должен входить минимум один виртуальный или физический сервер, обладающий следующими характеристиками:
+В состав технических средств по обеспечению работы сервиса для качественного обслуживания одновременно до 500 пользователей должен входить минимум один виртуальный или физический сервер, обладающий следующими характеристиками:
 
 \begin{itemize}
   \item 8 и более виртуальных или физических ядер, работающих с набором команд x86, x86-x64 или arm с частотой не менее 2ГГц;
@@ -15,7 +10,7 @@
   \item наличие резервного источника питания;
   \item резервный блок питания;
   \item наличие резервной линии с пропускной способностью не менее 400 Мбит/с с доступом в сеть интернет или целевую сеть сервиса;
-  \item возможность замены вышедших из строя дисков без выключения сервера.
+  \item возможность замены вышедших из строя дисков без необходимости выключения сервера.
 \end{itemize}
 
 \subsection{Требования к программному обеспечению}
@@ -25,7 +20,7 @@
 
 \subsection{Установка и конфигурация Java окружения}
 
-Способы установки JRE могут отличаться в зависимости от операционной системе. В операционных системах, работающих на ядре linux или BSD способ установки зависит от пакетного менеджера, установленного в системе по умолчанию.
+Способы установки JRE могут отличаться в зависимости от операционной системы. В операционных системах, работающих на ядре linux или BSD способ установки зависит от пакетного менеджера, установленного в системе по умолчанию.
 В операционных системах с пакетным менеджером apt-get терминальная команда, устанавливающая JRE выглядит следующим образом:
 \begin{lstlisting}
 # sudo apt-get update
@@ -49,19 +44,19 @@
 \end{lstlisting}
 
 В операционных системах семейства windows для установки JRE необходимо скачать и запустить исполняемый файл с одного из сайтов с бесплатной реализацией java.
-Например, Amazon Corretto с сайта amazon: https://docs.aws.amazon.com/en_us/corretto/latest/corretto-8-ug/downloads-list.html
-После запуска необходимо следовать инструкциям установщика.
+Например, Amazon Corretto с сайта amazon: https://docs.aws.amazon.com/en_us/corretto/latest/corretto-8-ug/downloads-list.html.
+После запуска необходимо следовать инструкциям установщика (рисунок \ref{screenshot-corretto}).
 \addimghere{screenshot-corretto}{0.8}{Окно установщика Amazon Corretto}{screenshot-corretto}
 
 \subsection{Установка и конфигурация PostgreSQL}
 
-Последовательность действий, необходимая для установки и конфигурации PostgreSQL в операционные системы семейства linux с пакетным менеджером apt-get следующая:
+Последовательность действий, необходимая для установки и конфигурации PostgreSQL в операционных системах семейства linux с пакетным менеджером apt-get следующая:
 \begin{lstlisting}
 # sudo apt-get update
 # sudo apt-get install postgresql postgresql-contrib
 \end{lstlisting}
 
-Для установки PostgreSQL на операционные системы с пакетом pkg:
+Для установки PostgreSQL на операционные системы с пакетным менеджером pkg:
 \begin{lstlisting}
 # sudo pkg install postgresql11-server postgresql11-client
 # sudo sysrc postgresql_enable=yes
@@ -69,21 +64,25 @@
 # /usr/local/etc/rc.d/postgresql start
 \end{lstlisting}
 
-Для того, чтобы разрешить подключение к базе с устройства, на котором запущен postgresql, необходимо открыть с правами привилегированного пользователя текстовым редактором файл /etc/postgresql/версия_postgresql/main/postgresql.conf и заменить строку \#listen_addresses = 'localhost' на listen_addresses = 'localhost', где localhost может быть ip адресом или маской подсети, которой разрешено подключение к базе данных.
+Для того, чтобы разрешить подключение к базе данных с устройства, на котором запущен postgresql, необходимо открыть с правами привилегированного пользователя текстовым редактором файл /etc/postgresql/версия_postgresql/main/postgresql.conf и добавить в конец файла строку строку следующего содеражния:
+\begin{lstlisting}
+listen_addresses = 'localhost'
+\end{lstlisting}
+где localhost может быть ip адресом или адресом сети, устройствам которой разрешено подключение к базе данных.
 
 После установки необходимо сконфигурировать учетные записи.
 \begin{lstlisting}
 # sudo -u postgres psql postgres
-ALTER USER postgres with encrypted password 'ваш_пароль';
+ALTER USER postgres with encrypted password '_ваш пароль';
 \end{lstlisting}
 Для разделенного доступа к базе данных и повышеной безопасности, необходимо создать пользователя с доступом только к необходимым базам данных и таблицам:
 \begin{lstlisting}
 CREATE DATABASE image_hosting;
-CREATE USER hosting_service WITH password 'безопасный_пароль';
+CREATE USER hosting_service WITH password '_безопасный пароль';
 GRANT ALL ON DATABASE image_hosting TO hosting_service;
 \end{lstlisting}
 
-После успешной конфигурации, необходимо разрешить подключение данному пользователю с удаленного устройства или с устройства, на котором производится конфигурация в случае, если сам сервис планируется установить на тот же сервер, что и PostgreSQL. Для того, чтобы разрешить подключение к базе данных пользователю, необходимо в конец файла /etc/postgresql/версия_postgresql/main/pg_hba.conf добавить следующую строку:
+После успешной конфигурации, требуется разрешить подключение данному пользователю с удаленного устройства или с устройства, на котором производится конфигурация в случае, если сам сервис планируется установить на тот же сервер, что и PostgreSQL. Для того, чтобы разрешить подключение к базе данных пользователю, необходимо в конец файла /etc/postgresql/версия_postgresql/main/pg_hba.conf добавить следующую строку:
 \begin{lstlisting}
 local   all         hosting_service                          md5
 \end{lstlisting}
@@ -95,516 +94,125 @@ local   all         hosting_service                          md5
 SELECT pg_reload_conf()
 \end{lstlisting}
 
-В операционных системах семейства windows необходимо перейти на оффициальный сайт PostgreSQL, скачать установщик, следовать его инструкциям, после чего запустить PgAdmin и сконфигурировать учетные записи в графическом интерфейсе.
+В операционных системах семейства windows необходимо перейти на оффициальный сайт PostgreSQL, скачать установщик, следовать его инструкциям (рисунок \ref{postgresql-screenshot}), после чего запустить PgAdmin и сконфигурировать учетные записи в графическом интерфейсе.
+\addimghere{postgresql-screenshot}{0.8}{Окно установщика PostgreSQL}{postgresql-screenshot}
 
 \subsection{Установка и конфигурация программного решения}
 
-После проведения всех операций по установке
+После проведения всех операций по установке и настройке окружения, необходимо установить исполняемый jar файл сервиса на сервер.
+Оптимальной будет директория /opt/hosting-service/
 
-Почтовой связкой на сервере shared-хостинга выступает SMTP-сервер Exim Internet Mailer, а запросы по протоколам POP3 и IMAP принимает Dovecot.
-В качестве антиспам-связки выступает Postgrey, Spamassasin, ClamAV и OpenDKIM.
-Конфигурации данных сервисов являются стандартными.
+После чего необходимо добавить исполняемый файл в сервисы менеджера системы и сервисов.
+Для менеджера systemctl в директории /lib/systemd/system/ необходимо создать свой файл myservice.service следующего содержания:
 
-ProFTPd необходим для работы пользователей по протоколу FTP.
-Доступна возможность подключения пользователей по протоколу FTPS (порт 22).
+\begin{lstlisting}
+[Unit]
+Description=Tomcat Instance
 
-Сервер управления временем NTP обращается к следующим серверам за уточнением времени на сервере:
-\begin{lstlisting}
-# cat /etc/ntp.conf | grep ^server | awk '{print $2}'
-0.debian.pool.ntp.org
-1.debian.pool.ntp.org
-2.debian.pool.ntp.org
-3.debian.pool.ntp.org
-\end{lstlisting}
-Конфигурация SSH требует отдельного пояснения.
-Доступ к SSH по стандартному порту закрыт, это позволяет избавиться от большинства злоумышленников, которые пытаются скомпрометировать пароль доступа к серверу.
-Также запрещен вход от пользователя root, для этого создан отдельный пользователь.
-Можно ограничить доступ к серверу по SSH, оставив только доверенные адреса или подсети адресов.
-\begin{lstlisting}
-# useradd sshuser
-# passwd sshuser
-# cat /etc/ssh/sshd_config
-Port 222
-PermitRootLogin yes
-Match host 10.0.0.111, 10.0.0.222
-  PermitRootLogin yes
-# service ssh restart
-\end{lstlisting}
-Подключение к серверу по SSH и получение root-прав:
-\begin{lstlisting}
-user@10.0.0.111~$ ssh -p 222 sshuser@10.0.0.100
-sshuser@10.0.0.100's password:
-sshuser@10.0.0.100~$ su -
-Password:
-root@10.0.0.100~#
-\end{lstlisting}
-Разрешен вход на сервер по ключам:
-\begin{lstlisting}
-user@10.0.0.111~$ ssh-keygen
-user@10.0.0.111~$ ssh-keygen -p
-user@10.0.0.111~$ ssh-copy-id -p 222 root@10.0.0.100
-user@10.0.0.111~$ ssh -p 222 root@10.0.0.100
-\end{lstlisting}
-Резервное копирование данных пользователей осуществляется средствами панели ISPmanager 5 в ночное время, применяется инкрементальный метод резервного копирования.
-В инкрементальном методе копирования при первом резервном копировании будет создана полная копия, в которой будут сохранены все файлы.
-При последующих будут сохраняться файлы, измененные с момента предыдущей полной или инкрементальной копии.
-Для восстановления необходимо несколько копий --- полная и все инкрементальные, сохраненные до выбранной точки восстановления.
-Раз в неделю (в воскресенье) запускается очередная полная резервная копия данных.
-На сервере функционирует скрипт блокировки адресов, которые слишком часто подбирают пароли доступа к панели администратора наиболее популярных CMS (система управления содержимым), таких как WordPress и Joomla.
-Скрипт написан на языке Shell, находится в открытом доступе и имеет простое использование:
-\begin{lstlisting}
-#!/bin/bash
-# Nginx block ip more than 3k connections to WordPress \
-and Joomla admin panels
-# admin@amet13.name
-# v0.1 29.06.2014
-# v0.2 30.06.2014
-# IP's > 3000 connections to WordPress and Joomla admin panels
-command=$(cat /var/log/nginx/access.log | \
-grep "administrator/index.php \|wp-login.php " | \
-cut -f1 -d " " | \
-sort | \
-uniq -c | \
-sort -n | \
-awk '{ if ($1 > 2999) print $2}')
+[Service]
+Type=simple
+RemainAfterExit=yes
+ExecStart=java -jar /opt/hosting-service/service.jar
+User=hosting
+Group=hosting
 
-# Add new ip's to database
-for word in $command; do
-   # Is that ip already in database?
-   grep $word /etc/nginx/blockips.conf > /dev/null
-   if (( $? ));
-   then 
-      sed -i "s/allow all;/deny $word;\nallow all;/" \
-      /etc/nginx/blockips.conf
-   fi
-done
-exit 0
+[Install]
+WantedBy=multi-user.target
 \end{lstlisting}
 
-Основные конфигурации настроек веб-сервера хранятся в файлах:
-\begin{itemize}
-  \item /etc/nginx/nginx.conf;
-  \item /etc/apache2/apache2.conf;
-  \item /etc/php5/\{apache2,cgi,cli,fpm\}/php.ini;
-  \item /etc/mysql/my.cnf;
-  \item /etc/postgresql/9.1/main/postgresql.conf.
-\end{itemize}
-
-Для сканирования уязвимостей на сайтах пользователей используется утилита maldet, которая находит подозрительные файлы в системе и составляет отчет по найденным файлам.
-
-Установка и пример использования maldet:
+Для того, чтобы сервис запускался автоматически после загрузки сервера необходимо добавить сервис в автозагрузку systemctl:
 \begin{lstlisting}
-# cd /tmp/
-# wget http://www.rfxn.com/downloads/maldetect-current.tar.gz
-# tar xfz maldetect-current.tar.gz
-# cd maldetect-*
-# ./install.sh
-
-# maldet -b --scan-all /var/www/
-# maldet --report list
-# maldet --report 021715-1414.3266
-# maldet -q 021715-1414.3266
+$ sudo systemctl enable myservice
 \end{lstlisting}
 
-На сервере shared-хостинга на сайтах пользователей находится большое количество уязвимостей, которые часто используются для рассылки спама с сервера.
-Для обнаружения большого числа рассылок с сервера был написан плагин для системы мониторинга Nagios, который контролирует число писем в почтовой очереди, а также проверяет наиболее популярные организации (например Spamhaus), которые собирают данные о спам-серверах.
-
-Для просмотра списка очереди используется команда exim -bp или mailq.
-Таким образом можно просмотреть количество писем для разных доменов и их количество:
+Убрать сервис из автозагрузки в systemctl:
 \begin{lstlisting}
-# exim -bp | exiqsumm -c -s | head -10
-Count  Volume  Oldest  Newest  Domain
------  ------  ------  ------  ------
-12151  1378KB     14h      0m  spamsite.ru > host.ru
-   93   264KB     14h      5m  spamsite.ru > gmail.com
-   16   154KB     13h     11h  site.ru > kk.com
-    8    77KB     13h     11h  site.ru > ww.com
+$ sudo systemctl disable myservice
 \end{lstlisting}
 
-В данном случае очевидна рассылка писем с сайта spamsite.ru.
-Посмотреть идентификатор письма (ID), а также содержимое заголовков и тела письма можно теми же командами, но с другими параметрами:
+Узнать стоит ли сервис в автозагрузке:
 \begin{lstlisting}
-# exiqgrep -b -f 'spamsite.ru' | head -1
-1YyRgs-0000zD-Qy From: <fobos@spamsite.ru> To: maria@host.ru
-# exim -Mvh 1YyRgs-0000zD-Qy
-# exim -Mvb 1YyRgs-0000zD-Qy
+# systemctl is-enabled myservice
 \end{lstlisting}
 
-Если сайт действительно заражен, то следует отключить его, оповестить пользователя о закрытии сайта и необходимости избавления от вредоносного кода.
-Также необходимо удалить спам-письма из очереди сообщений:
+Для запуска/остановки/перезапуска сервиса служат следующие три комманды:
 \begin{lstlisting}
-# exiqgrep -b -f 'spamsite.ru' | \
-awk '{print $1}' | xargs exim -Mrm
-\end{lstlisting}
-В случае неработоспособности панели ISPmanager 5 возможна ее перезагрузка:
-\begin{lstlisting}
-# pgrep -l core
-4437 core
-7129 core
-21194 core
-# killall core
-\end{lstlisting}
-\subsection{Сервер виртуализации OpenVZ}
-Список всех существующих в системе контейнеров можно узнать командой vzlist -a:
-\begin{lstlisting}
-# vzlist -a
-      CTID      NPROC STATUS    IP_ADDR      HOSTNAME
-       145        134 running   10.0.0.245   site1.ru
-       146         41 running   10.0.0.246   site2.ru
-       205          - stopped   10.0.0.205   site3.ru
-\end{lstlisting}
-В заголовках показывается показывается ID контейнера, число процессов в контейнере, текущий статус, IP-адрес и имя контейнера.
-Список всех доступных шаблонов операционной системы и список шаблонов установленных локально:
-\begin{lstlisting}
-# vztmpl-dl --list-all
-centos-5-x86
-centos-5-x86_64
-centos-5-x86_64-devel
-centos-5-x86-devel
-centos-6-x86
-centos-6-x86_64
-centos-6-x86_64-devel
-# vztmpl-dl --list-local
-centos-7-x86_64
-debian-7.0-x86_64
-ubuntu-14.04-x86_64
-\end{lstlisting}
-Каждый контейнер имеет свой конфигурационный файл, которые хранятся в каталоге /etc/sysconfig/vz-scripts/, именуются эти файлы по CTID контейнера.
-Например, для контейнера с CTID=101, файл будет называться 101.conf.
-При создании контейнера можно использовать типовую конфигурацию для VPS.
-Типовые файлы конфигураций находятся в том же каталоге:
-\begin{lstlisting}
-# ls -1 /etc/sysconfig/vz-scripts/ | grep sample
-ve-basic.conf-sample
-ve-ispbasic.conf-sample
-ve-light.conf-sample
-ve-vswap-1024m.conf-sample
-ve-vswap-1g.conf-sample
-ve-vswap-256m.conf-sample
-ve-vswap-2g.conf-sample
-ve-vswap-4g.conf-sample
-ve-vswap-512m.conf-sample
-\end{lstlisting}
-В этих конфигурационных файлах описаны контрольные параметры ресурсов, выделенное дисковое пространство, оперативная память и прочие ресурсы.
-На базе уже существующего файла конфигурации создан типовой файл, подходящий для большинства контейнеров именуемый ve-custom.conf-sample.
-Таким образом, при использовании этого конфигурационного файла, будет создаваться контейнер, которому будет доступен 1 Гб выделенного дискового пространства, 128 Мб оперативной памяти и 128 Мб SWAP.
-В дальнейшем, при создании контейнеров, следует использовать данный конфигурационный файл.
-Создание контейнера осуществляется командой:
-\begin{lstlisting}
-# vzctl create 101 --ostemplate debian-7.0-x86_64 --config custom
-\end{lstlisting}
-где 101 --- CTID контейнера, -{}-ostemplate --- шаблон ОС, -{}-config --- используемый шаблон конфигурационного файла.
-Перед первым запуском контейнера необходимо установить его IP адрес, hostname, указать DNS сервера и задать пароль суперпользователя.
-Для настройки VPS используется команда vzctl set.
-Для того, чтобы контейнер запускался при старте хост-компьютера (например после перезагрузки), необходимо использовать команду:
-\begin{lstlisting}
-# vzctl set 101 --onboot yes --save
-\end{lstlisting}
-При использовании ключа -{}-save, сохраняются параметры контейнера в соответствующий ему конфигурационный файл.
-Аналогично задается hostname и IP-адрес:
-\begin{lstlisting}
-# vzctl set 101 --hostname site.ru --save
-# vzctl set 101 --ipadd 10.0.0.210 --save
-\end{lstlisting}
-Адреса DNS серверов (в большинстве случаев адрес DNS совпадает с адресом хост-компьютера, поэтому можно вместо адреса указать параметр inherit):
-\begin{lstlisting}
-# vzctl set 101 --nameserver inherit --save
-\end{lstlisting}
-Установка пароля суперпользователя:
-\begin{lstlisting}
-# vzctl set 101 --userpasswd root:p@ssw0rd
-\end{lstlisting}
-Пароль будет установлен в VPS, в файл /etc/shadow и не будет сохранен в конфигурационный файл контейнера.
-Если же пароль будет утерян или забыт, то можно будет просто задать новый.
-После настроек нового контейнера, его можно запустить:
-\begin{lstlisting}
-# vzctl start 101
-\end{lstlisting}
-Проверка сетевых интерфейсов внутри гостевой ОС:
-\begin{lstlisting}
-# vzctl exec 101 ifconfig | grep "lo\|venet" -A 1
-lo        Link encap:Local Loopback
-          inet addr:127.0.0.1  Mask:255.0.0.0
---
-venet0    Link encap:UNSPEC  HWaddr 00-00-00-00-00-00
-          inet addr:127.0.0.2  P-t-P:127.0.0.2  \
-          Bcast:0.0.0.0  Mask:255.255.255.255
---
-venet0:0  Link encap:UNSPEC  HWaddr 00-00-00-00-00-00
-          inet addr:10.0.0.210  P-t-P:10.0.0.210  \
-          Bcast:10.0.0.201  Mask:255.255.255.255
-\end{lstlisting}
-Должны присутствовать сетевые интерфейсы:
-\begin{itemize}
-    \item lo (127.0.0.1);
-    \item venet0 (127.0.0.2);
-    \item venet0:0 (10.0.0.210).
-\end{itemize}
-Если сеть в порядке, то можно соединиться к контейнеру по SSH с хост-компьютера:
-\begin{lstlisting}
-# ssh root@10.0.0.210
-root@10.0.0.210's password: p@ssw0rd
-\end{lstlisting}
-Вход в контейнер напрямую с хост-компьютера осуществляется командой vzctl enter:
-\begin{lstlisting}
-# vzctl enter 101
-entered into CT 101
-root@site:/#
-\end{lstlisting}
-Для остановки контейнера используется команда vzctl stop.
-Для полной остановки контейнера, системе требуется немного времени.
-Иногда нужно выключить VPS как можно быстрее, например, если контейнер был подвержен взлому.
-Для того чтобы срочно выключить VPS, используется ключ -{}-fast:
-\begin{lstlisting}
-# vzctl stop 101 --fast
-\end{lstlisting}
-Для перезапуска контейнера можно использовать команду vzctl restart.
-Для того чтобы удалить контейнер, его нужно сначала остановить:
-\begin{lstlisting}
-# vzctl stop 101
-# vzctl destroy 101
-\end{lstlisting}
-Команда выполняет удаление частной области сервера и переименовывает файл конфигурации, дописывая к нему .destroyed.
-Иногда бывает нужно выполнить команду на нескольких VPS.
-Для этого можно использовать команду:
-\begin{lstlisting}
-# for i in `vzlist -o veid -H`; do \
-echo "VPS $i"; vzctl exec $i command; done
-\end{lstlisting}
-Например можно узнать сколько времени работают все запущенные контейнеры:
-\begin{lstlisting}
-# for i in `vzlist -o veid -H`; do \
-echo "VPS $i"; vzctl exec $i uptime; done
-VPS 101
- 05:45:01 up 2 min, 0 users, load average: 0.01, 0.02, 0.03
-VPS 102
- 05:46:01 up 1 min, 0 users, load average: 0.04, 0.05, 0.06
-\end{lstlisting}
-Если на хост-ноде наблюдается высокое значение Load Average, то в первую очередь следует посмотреть данные значения непосредственно у контейнеров:
-\begin{lstlisting}
-# vzlist -o veid,laverage
-      CTID       LAVERAGE
-       145 0.00/0.01/0.05
-       146 0.00/0.00/0.00
-       148 0.60/0.51/0.34
-\end{lstlisting}
-В случае обнаружения нагружающего контейнера, стоит подключиться к нему и устранить причину нагрузки.
-Непосредственно с хост-ноды можно узнать, какому контейнеру принадлежит процесс:
-\begin{lstlisting}
-# vzpid 1048108
-Pid	    CTID	Name
-1048108	145	  php-cgi
-\end{lstlisting}
-Свободное место в контейнере можно узнать командой df:
-\begin{lstlisting}
-# df -h
-Filesystem            Size  Used Avail Use% Mounted on
-/dev/mapper/lv_root    50G  5,6G   42G  12% /
-tmpfs                  16G     0   16G   0% /dev/shm
-/dev/cciss/c0d0p1     485M  276M  184M  61% /boot
-/dev/mapper/lv_vz     489G  403G   62G  87% /vz
-# df -i
-Filesystem             Inodes IUsed    IFree IUse% Mounted on
-/dev/mapper/lv_root   3276800 55229  3221571    2% /
-tmpfs                 4101290     1  4101289    1% /dev/shm
-/dev/cciss/c0d0p1      128016    96   127920    1% /boot
-/dev/mapper/lv_vz    32546816   248 32546568    1% /vz
-\end{lstlisting}
-Подключение модуля TUN для контейнера (необходимо для работы OpenVPN).
-Прежде чем запускать контейнер нужно убедиться, что модуль TUN загружен на хост-ноде:
-\begin{lstlisting}
-# lsmod | grep tun
-\end{lstlisting}
-В случае, если модуль не загружен:
-\begin{lstlisting}
-# modprobe tun
-# lsmod | grep tun
-tun     1957    0
-\end{lstlisting}
-Разрешаем использовать устройство TUN контейнеру:
-\begin{lstlisting}
-# vzctl set 101 --devnodes net/tun:rw --save
-# vzctl set 101 --devices c:10:200:rw --save
-# vzctl set 101 --capability net_admin:on --save
-\end{lstlisting}
-Запуск контейнера:
-\begin{lstlisting}
-# vzctl start 101
-\end{lstlisting}
-Создание в контейнере собственного устройства TUN:
-\begin{lstlisting}
-# vzctl exec 101 mkdir -p /dev/net
-# vzctl exec 101 mknod /dev/net/tun c 10 200
-# vzctl exec 101 chmod 600 /dev/net/tun
-\end{lstlisting}
-Для пользователей в контейнерах доступен брандмауэр Netfilter, для его работы в файле /etc/vz/vz.conf должна присутствовать строка:
-\begin{lstlisting}
-IPTABLES="ipt_owner ipt_REDIRECT ipt_recent ip_tables \
-iptable_filter iptable_mangle ipt_limit ipt_multiport \
-ipt_tos ipt_TOS ipt_REJECT ipt_TCPMSS ipt_tcpmss \
-ipt_ttl ipt_LOG ipt_length ip_conntrack ip_conntrack_ftp \
-ipt_state iptable_nat ip_nat_ftp"
-\end{lstlisting}
-Для того, чтобы для контейнеров был доступен FUSE, его необходимо включить на хост-ноде и проверить, что он успешно включен:
-\begin{lstlisting}
-# modprobe fuse
-# lsmod | grep fuse
-fuse  92980  54
-\end{lstlisting}
-Также необходимо добавить автозагрузку модуля при перезапуске хост-ноды:
-\begin{lstlisting}
-# vim /etc/rc.local
-#!/bin/sh
-modprobe fuse
-\end{lstlisting}
-Проброс FUSE для контейнера 101:
-\begin{lstlisting}
-# vzctl stop 101
-# vzctl set 101 --devnodes fuse:rw --save
-# vzctl set 101 --devices c:10:229:rw --save
-# vzctl start 101
-\end{lstlisting}
-В контейнере проверяем, пробросилось ли устройство:
-\begin{lstlisting}
-[root@site /]# ls /dev/fuse
-/dev/fuse
-\end{lstlisting}
-Резервное копирование контейнеров осуществляется утилитами vzdump и vzrestore:
-\begin{lstlisting}
-# vzdump --suspend --compress --dumpdir /root/ \
---exclude-path /tmp/ 101
-# vzrestore \
-/vz/dump/vzdump-openvz-101-2015_01_01-12_12_12.tar 103
-\end{lstlisting}
-Для работы OpenVZ с файлами используется ploop, так как simfs является устаревшим методом.
-Диски с файловыми системами контейнеров хранятся в /vz/private и имеют имя root.hdd.
-Смена размера диска для контейнера:
-\begin{lstlisting}
-# vzctl set 103 --diskspace 2G --save
-\end{lstlisting}
-\subsection{Сервер виртуализации KVM}
-В целом, администрирование KVM-ноды не отличается от администрирования OpenVZ.
-Однако в случае OpenVZ возможно получить доступ к пользовательскому контейнеру непосредственно с хост-ноды, в случае с KVM это невозможно, это следует учесть при работе с виртуальной машиной.
-Изменение размера диска также является нетривиальной задачей, высок риск краха всей файловой системы без возможности восстановления данных.
-Команды, которые чаще всего используются при администрировании виртуальных машин на базе KVM:
-\begin{lstlisting}
-# virsh list --all
-# virsh start lin_templ
-# virsh shutdown lin_templ
-# virsh destroy lin_templ
-# virsh undefine lin_templ
-# virsh autostart lin_templ
-# virsh autostart --disable lin_templ
-# virsh define /etc/libvirt/qemu/lin_templ.xml
-# virsh vncdisplay lin_templ
-# virsh dumpxml lin_templ | grep vnc
-\end{lstlisting}
-Для защиты сервера от брутфорса пароля SSH на серверах OpenVZ и KVM используется fail2ban.
-Установка (в CentOS 6, для установки fail2ban нужно подключить репозиторий EPEL):
-\begin{lstlisting}
-# rpm -ivh http://download.fedoraproject.org/pub/epel/6/$(arch)/epel-release-6-8.noarch.rpm
-# yum install fail2ban
+# systemctl start myservice
+# systemctl stop myservice
+# systemctl restart myservice
 \end{lstlisting}
 
-fail2ban блокирует с помощью IPTables на некоторое время активные адреса, которые пытаются соединиться по SSH после пяти неудачных попыток, также отправляет администратору письмо с уведомлением о блокировке:
-\begin{lstlisting}
-# cat /etc/fail2ban/jail.local
-[ssh-iptables]
-enabled = true
-filter = sshd
-action = iptables[name=SSH, port=ssh, protocol=tcp]
-sendmail-whois[name=SSH, dest=admin@domain.com, \
-sender=fail2ban@example.com, sendername="Fail2Ban"]
-maxretry = 5
-bantime = 86400
-\end{lstlisting}
+Для конфигурации сервиса, в первую очередь необходимо поместить файл application.properties из поставки приложения в директорию с установленным приложением.
+После чего сконфигурировать сервис.
+Прежде всего требуется указать настройки подключения к базе данных и данные аутентификации почтового ящика для отправки электронных писем с ссылкой подтверждения регистрации. Описание всех настроек приложения приведено в таблице \ref{properties-table}
 
-Разблокировать IP адрес из бана:
-\begin{lstlisting}
-# fail2ban-client set JAIL unbanip IP
-\end{lstlisting}
-
-Пример разблокировки:
-\begin{lstlisting}
-# fail2ban-client set ssh-iptables unbanip 10.0.0.111
-\end{lstlisting}
-
-В виртуальных машинах пользователи зачастую склонны забывать пароль от MySQL.
-В данном случае существует простое решение проблемы.
-Остановка службы MySQL:
-\begin{lstlisting}
-# service mysql stop
-\end{lstlisting}
-
-Запуск службы с опцией -{}-skip-grant-tables:
-\begin{lstlisting}
-# mysqld_safe --skip-grant-tables &
-\end{lstlisting}
-
-Подключение с серверу MySQL при помощи клиента:
-\begin{lstlisting}
-# mysql -u root
-mysql>
-\end{lstlisting}
-
-Ввод нового пароля для root:
-\begin{lstlisting}
-mysql> use mysql;
-mysql> update user set password=PASSWORD("NEW-PASS") \
-where User='root';
-mysql> flush privileges;
-mysql> quit
-\end{lstlisting}
-
-Остановка сервера MySQL:
-\begin{lstlisting}
-# service mysql stop
-\end{lstlisting}
-
-Запуск MySQL-сервера и вход с новым паролем:
-\begin{lstlisting}
-# service mysql start
-# mysql -u root -p
-Enter password: NEW-PASS
-\end{lstlisting}
-
-\subsection{Дополнительные виртуальные сервера}
-
-В качестве сервера мониторинга используется Nagios, для построения графиков --- Munin.
-Дополнительной настройки этих сервисов не требуется.
-Добавление новых хостов происходит вручную, требуется лишь править адреса и сервисы, которые требуется мониторить.
-
-Важно мониторить свободное место на жестком диске сервера резервного копирования и вовремя очищать старые резервные копии.
-
-На DNS серверах используется master-slave репликация, причем один из DNS-серверов, равно как и сервер мониторинга расположены в другом дата-центре для обеспечения отказоустойчивости системы.
-Также между подчиненными серверами настроена балансировка нагрузки.
+\begin{table}[H]
+  \caption{Api контроллера аутентификации}\label{properties-table}
+  \begin{tabular}{|p{9cm}|p{7cm}|}
+  \hline Настройка & Описание \\
+  \hline spring.servlet.multipart.enabled=true & Передача файлов по частям \\
+  \hline spring.servlet.multipart.file-size-threshold=2KB & Размер части  принимаемого файла, после получения которой она будет записываться на диск \\
+  \hline spring.servlet.multipart.max-file-size=40MB & Максимальный размер загружаемого файла \\
+  \hline spring.jpa.hibernate.ddl-auto=update & Автоматическое приведение схемы базы данных в соответствие модели классов сервиса \\
+  \hline spring.jpa.generate-ddl=true & Генерация запросов на созда \\
+  \hline spring.jpa.database-platform= org.hibernate.dialect.PostgreSQL94Dialect & Используемый диалект языка SQL для обращения к базе данных \\
+  \hline spring.datasource.driverClassName= org.postgresql.Driver & Используемый класс драйвера для обращения к базе данных \\
+  \hline spring.datasource.url= jdbc:postgresql://localhost:5432/image_hosting & \multirow{2}{=}{Адрес соединения с базой данных} \\
+  \cline{1-1} spring.datasource.jdbcUrl= jdbc:postgresql://localhost:5432/image_hosting & \\
+  \hline spring.datasource.username=hosting_service & Имя пользователя базы данных\\
+  \hline spring.datasource.password=password & Пароль пользователя \\
+  \hline spring.jpa.show-sql=true & Логирование SQL запросов к базе данных \\
+  \hline file.image-storage-dir=./storage/ & Корневая директория, в которую будут сохраняться фотографии \\
+  \end{tabular}
+\end{table}
+\begin{table}[H]
+  \caption*{Окончание таблицы \ref{properties-table}}
+  \begin{tabular}{|p{9cm}|p{7cm}|}
+  \hline Настройка & Описание \\
+  \hline file.max-number-of-files-in-dir=10000 & Максимальное количество фотографий в поддиректории \\
+  \hline file.size-of-path-tree=1 & Глубина вложенности директорий хранилища фотографий \\
+  \hline file.dir-name-length=2 & Длинна названия директорий с файлами \\
+  \hline color.high-value=256 & Верхняя граница значения цвета по одному каналу \\
+  \hline color.low-value=0 & Нижняя граница значения цвета по одному каналу \\
+  \hline support.email=support@gmail.com & Электронная почта, с которой отправляется письмо для подтверждения регистрации \\
+  \hline spring.mail.host=smtp.gmail.com & Адрес почтового сервера \\
+  \hline spring.mail.port=465 & Порт почтового сервера \\
+  \hline spring.mail.protocol=smtps & Протокол почтовой службы \\
+  \hline spring.mail.username=support@gmail.com & Имя пользователя почтового ящика для аутентификации \\
+  \hline spring.mail.password=qwertyPassword123 & Пароль пользователя почтового ящика для аутентификации \\
+  \hline spring.mail.properties.mail.transport.protocol=smtps & Протокол почтовой службы \\
+  \hline spring.mail.properties.mail.smtps.auth=true & Использование аутентификации \\
+  \hline spring.mail.properties.mail.smtps.timeout=8000 & Таймаут аутентификации и отправки писем \\
+  \hline logging.level.org.hibernate.SQL=DEBUG & Уровень логирования SQL запросов. Возможные значения: DEBUG, INFO, WARN \\
+  \hline 
+  \end{tabular}
+\end{table}
 
 \subsection{Защита от DDoS-атак}
 
-Стоит незамедлительно реагировать на DDoS-атаки.
-При обнаружении подозрительного трафика следует убедиться, что это действительно DDoS, а также поинтересоваться у дата-центра реакцию сетевого оборудования на нее.
+При обнаружении подозрительного трафика следует убедиться, что это действительно DDoS атака, а также проследить за реакцией сетевого оборудования на нее.
 Определить DDoS это или нет можно с помощью утилит netstat и iftop.
 
-Намеренную DDoS-атаку сложно остановить лишь с помощью программных средств, однако некоторые несложные скрипты позволяют отражать небольшие <<любительские>> атаки на отказ.
-Подобный скрипт блокировки DDoS-атак представлен в приложении А.
-Скрипт анализирует текущие подключения к серверу на основе утилиты netstat, в случае превышения определенного лимита подключений, адрес попадает в блок IPTables на некоторое время.
+Намеренную DDoS-атаку остановить с помощью программных средств практически невозможно, однако некоторые программные решения позволяют отражать небольшие атаки.
+Одним из таких программных решений является DDoS-Deflate.
+Он анализирует подключения к серверу на основании данных программного решения netstat, входящего в поставку большинства дистрибутивов linux и в случае превышения лимита подключений с одного адреса, запросы с него блокируются на некоторое время.
 
-Для блокировки намеренных атак требуется аппаратная защита на уровне сетевого оборудования.
+Для блокировки намеренных атак требуется поддержка аппаратной защиты от атак сетевым оборудованием.
 Защита от распределенных DDoS-атак основывается на мно­го­фак­тор­ном анализе трафика, который поступает на каждый защищаемый сервер.
 Во время нормальной работы система защиты может самообучаться или настраиваться, а после обнаружения атаки либо автоматически, либо по требованию, активно про­тиво­дей­ству­ет нелегитимному трафику.
 
 В данном случае защитником выступает дата-центр, который имеет в распоряжении оборудование, способное осуществлять фильтрацию трафика и предотвращение атак на отказ.
 
-\subsection{Общие рекомендации по администрированию инфраструктуры}
+\subsection{Общие рекомендации по администрированию}
 
 Следует следить за новостными рассылками о критических уязвимостях в операционной системе и используемом программном обеспечении.
 
 Если работа сервера замедлилась, в диагностике проблемы помогут утилиты ps, top, atop, htop.
 В случае обнаружения сетевых проблем на помощью придут утилиты ping, traceroute, nmap, mtr, tcpdump, iftop.
 
-Важно следить за состоянием RAID на сервере, в случае сбоя одного из дисков, следует обратиться к поддержке дата-центра с просьбой о замене диска.
+Важно следить за состоянием RAID на сервере и в случае сбоя одного из дисков, следует произвести замену диска.
 
-Необходимо подбирать сложные для перебора пароли, периодически их менять и уведомлять пользователей о смене пароля.
+Также необходимо подбирать сложные для перебора пароли, периодически их менять и уведомлять пользователей о смене пароля.
 Для генерации паролей подходит утилита pwgen:
 \begin{lstlisting}
 # pwgen 12 -s1yc
@@ -614,24 +222,18 @@ Y;Xhfu;04A{O
 Стоит аккуратно работать на сервере под учетной записью root, не стоит запускать неизвестные скрипты или двоичные файлы.
 Необходимо проверять контрольные суммы загруженных пакетов и следить за цифровой подписью.
 
-Не следует просто так перезагружать сервер, рекомендуется это делать только в случаях чрезвычайной необходимости (например обновление ядра).
+Не следует просто так перезагружать сервер, рекомендуется это делать только в случаях чрезвычайной необходимости (таких как обновление ядра).
 
 Всегда стоит проверять наличие актуальных резервных копий, а также свободное место на системах хранения данных.
 Стоит также настроить ротацию логов, это позволит сэкономить место на диске.
 
-На физических нодах стоит устанавливать только самый необходимый, минимальный набор программного обеспечения, для уменьшения вероятности компрометации сервера.
-
 Всегда стоит вести документацию в том или ином виде и логировать свои действия на сервере.
 Логи, которые могут помочь в диагностике неисправностей:
 \begin{itemize}
-  \item /var/log/\{apache2,httpd\}/error.log;
   \item /var/log/auth.log;
   \item /var/log/dmesg;
   \item /var/log/kern.log;
-  \item /var/log/libvirt/libvirtd.log;
-  \item /var/log/mail.log;
   \item /var/log/messages;
-  \item /var/log/mysql/mysql-slow.log;
   \item /var/log/nginx/error.log;
   \item /var/log/syslog;
   \item /var/log/vzctl.log.

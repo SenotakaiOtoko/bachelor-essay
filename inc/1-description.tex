@@ -1,0 +1,439 @@
+\section{Назначение и условия применения программы}
+\subsection{Назначение системы}
+Проектируемое приложение предназначено для обеспечения надёжного хранения фотографий пользователей на удаленном сервере с возможностью индексирования фотографий и осуществления поиска фотографий по хранилищу.
+Приложение позволяет загружать и просматривать фотографии, помечать фотографии тегами в автоматическом или полуавтоматическом режиме, комментировать и оценивать фотографии, производить поиск фотографий по ключевым словам или по преобладающим цветам на фотографии.
+
+\subsection{Классы и характеристики пользователей}
+
+Перечень классов пользователей системы и их краткая характеристика представлены в таблице \ref{user-classes-table}.
+\begin{table}[H]
+  \caption{\onehalfspacing Классы и характеристики пользователей системы хранения фотографий}\label{user-classes-table}
+  \begin{tabular}{|p{4cm}|p{12cm}|}
+  \hline Класс пользователей & Описание \\ 
+  \hline Посетитель & Посетитель – человек, просматривающий фотографии, загруженные в сервис и доступные для всех, но не являющийся зарегистрированным пользователем \\ 
+  \hline Пользователь & Человек, прошедший регистрацию и подтвердивший себя посредством СМС или email. Отличается от посетителя большим набором возможностей, таким как публикация фотографий \\ 
+  \hline
+  \end{tabular}
+\end{table}
+
+\subsection{Варианты использования}
+Перечень вариантов использования системы приведена в таблице \ref{use-case-table}.
+Диаграмма вариантов использования на рисунке \ref{use-case} показывает варианты использования системы и связанные с ними действующие лица.
+
+
+\begin{table}[H]
+  \caption{\onehalfspacing Варианты использования системы хранения фотографий}\label{use-case-table}
+  \begin{tabular}{|p{6cm}|p{10cm}|}
+  \hline Основное действующее лицо & Вариант использования \\
+  \hline \multirow{6}{*}{Посетитель} & 1. Пройти регистрацию \\
+  \cline{2-2} & 2. Просмотреть ленту популярных фотографий \\
+  \cline{2-2} & 3. Просмотреть фотографии пользователя \\
+  \cline{2-2} & 4. Просмотреть информацию о фотографии \\
+  \cline{2-2} & 5. Осуществить поиск фотографии по необходимым критериям \\
+  \cline{2-2} & 6. Авторизоваться \\
+  \hline \multirow{10}{*}{Пользователь} & 1. Привязать популярные соц сети \\
+  \cline{2-2} & 2. Создать пост в соц сетях \\
+  \cline{2-2} & 3. Настроить приватность фотографии \\
+  \cline{2-2} & 4. Настроить защиту от копирования \\
+  \cline{2-2} & 5. Оценить фотографию \\
+  \cline{2-2} & 6. Прокомментировать фотографию \\
+  \cline{2-2} & 7. Просмотреть статистику \\
+  \cline{2-2} & 8. Сохранить в избранное \\
+  \cline{2-2} & 9. Подписаться на публикации других пользователей \\
+  \cline{2-2} & 10. Опубликовать фотографию \\
+  \hline
+  \end{tabular}
+\end{table}
+
+\begin{landscape}
+    \addimg{use-case}{1.0}{Диаграмма вариантов использования программного решения для хранения фотографий}{use-case}
+\end{landscape}
+
+\section{Описание структуры программного комплекса}
+\subsection{Диаграмма классов}
+На рисунке \ref{program-structure} представлена диаграмма классов разбитая по пакетам (утилиты, аутентификация, модель базы данных, сервисы, веб, валидация, свойства, блоки отображений). На рисунках \ref{persistense}-\ref{web} представлены диаграммы классов основных пакетов
+\addimghere{program-structure}{0.8}{Диаграмма классов, разбитая по пакетам}{program-structure}
+
+\begin{landscape}
+    \addimghere{persistense}{0.75}{Диаграмма классов пакета persistense}{persistense}
+\end{landscape}
+
+\addimghere{service}{1}{Диаграмма классов пакета service}{service}
+\addimghere{web}{1}{Диаграмма классов пакета web}{web}
+
+\subsection{Описание классов}
+На рисунках \ref{crc-table-first}-\ref{crc-table-last} представлены CRC карточки сервиса с элементами социальной сети для публикации фотографий
+\input{inc/0-crc.tex}
+
+\subsection{Структура базы данных}
+База данных проектируемого сервиса организована в системе управления базами данных PostgreSQL. 
+В таблице \ref{database-table} приведён перечень таблиц базы данных. 
+Спецификация структуры базы данных представлена в таблицах \ref{database-table-camera}-\ref{database-table-photo-group-user-like}
+На рисунке \ref{database-structure-1} представлена модель базы данных программного решения.
+
+\begin{table}[H]
+  \caption{\onehalfspacing Таблицы базы данных}\label{database-table}
+  \begin{tabular}{|p{6cm}|p{6cm}|p{4cm}|}
+  \hline Название таблицы & Описание & Тип \\
+  \hline camera & Справочник моделей фотокамер & ImageHostingDB \\
+  \hline photo_group_metadata & Метаданные фотографии & ImageHostingDB \\
+  \hline photo_group_color_area & Индексированные данные о цвете на фотографии & ImageHostingDB \\
+  \hline photo_group_post & Связь группы фотографий и поста & ImageHostingDB \\
+  \hline photo_single & Фотография конкретного назначения & ImageHostingDB \\
+  \hline photo_group_user_like & Бинарная оценка группы фотографий пользователем & ImageHostingDB \\
+  \hline world_net_class & Один класс из классификации WordNetId & ImageHostingDB \\
+  \hline tag & Ключевое слово, связывающее несколько объектов общими признаками & ImageHostingDB \\
+  \hline photo_group_tag & Связь группы фотографий и тегов & ImageHostingDB \\
+  \hline photo_group & Совокупность фотографий одного содержания, но разных назначений & ImageHostingDB \\
+  \end{tabular}
+\end{table}
+\begin{table}[H]
+  \caption*{\onehalfspacing Окончание таблицы \ref{database-table}}
+  \begin{tabular}{|p{6cm}|p{6cm}|p{4cm}|}
+  \hline Название таблицы & Описание & Тип \\
+  \hline post & Совокупность одной или нескольких фотографий и теста, опубликованных в сервисе  & ImageHostingDB \\
+  \hline post_tag & Связь постов и тегов & ImageHostingDB \\
+  \hline photo_group_user_access & Лист доступа к группе фотографий & ImageHostingDB \\
+  \hline comment & Комментарий пользователя к группе фотографий & ImageHostingDB \\
+  \hline post_user_like & Бинарная оценка поста пользователем & ImageHostingDB \\
+  \hline user_auth_cookie & Аутентификационные ключи доступа браузеров пользователей & ImageHostingDB \\
+  \hline user_account & Аккаунт пользователя & ImageHostingDB \\
+  \hline password_reset_token & Токен для сброса пароля & ImageHostingDB \\
+  \hline privelege & Справочник привелегий ролей & ImageHostingDB \\
+  \hline roles_priveleges & Привелегии ролей & ImageHostingDB \\
+  \hline role & Справочник ролей пользователей & ImageHostingDB \\
+  \hline user_roles & Роли пользователей & ImageHostingDB \\
+  \hline verification_token & Токены подтверждения аккаунтов пользователей & ImageHostingDB \\
+  \hline
+  \end{tabular}
+\end{table}
+
+\addimghere{database-structure-1}{1}{Модель базы данных программного решения для хранения фотографий}{database-structure-1}
+
+\begin{table}[H]
+  \caption{\onehalfspacing Описание структуры таблицы camera}\label{database-table-camera}
+  \begin{tabular}{|p{6cm}|p{6cm}|p{4cm}|}
+  \hline Название атрибута & Описание & Тип \\
+  \hline id & Уникальный идентификатор & int8 \\
+  \hline name & Наименование камеры & varchar(255) \\
+  \hline
+  \end{tabular}
+\end{table}
+
+\begin{table}[H]
+  \caption{\onehalfspacing Описание структуры таблицы photo_group_metadata}\label{database-table-photo-group-metadata}
+  \begin{tabular}{|p{6cm}|p{6cm}|p{4cm}|}
+  \hline Название атрибута & Описание & Тип \\
+  \hline id & Уникальный идентификатор & int8 \\
+  \hline camera_id & Идентификатор камеры & int8 \\
+  \hline photo_group_id & Идентификатор группы фотографий & int8 \\
+  \hline
+  \end{tabular}
+\end{table}
+
+\begin{table}[H]
+  \caption{\onehalfspacing Описание структуры таблицы world_net_class}\label{database-table-world-net-class}
+  \begin{tabular}{|p{6cm}|p{6cm}|p{4cm}|}
+  \hline Название атрибута & Описание & Тип \\
+  \hline id & Уникальный идентификатор & int8 \\
+  \hline description & Описание класса & varchar(255) \\
+  \hline parent_id & Идентификатор родительского класса & int8 \\
+  \hline 
+  \end{tabular}
+\end{table}
+
+\begin{table}[H]
+  \caption{\onehalfspacing Описание структуры таблицы post}\label{database-table-post}
+  \begin{tabular}{|p{6cm}|p{6cm}|p{4cm}|}
+  \hline Название атрибута & Описание & Тип \\
+  \hline id & Уникальный идентификатор & int8 \\
+  \hline privacy_type & Приватность поста & int4 \\
+  \hline text & Текст поста & varchar(255) \\
+  \hline user_id & Уникальный идентификатор пользователя & int8 \\
+  \hline 
+  \end{tabular}
+\end{table}
+
+\begin{table}[H]
+  \caption{\onehalfspacing Описание структуры таблицы post_user_like}\label{database-table-post-user-like}
+  \begin{tabular}{|p{6cm}|p{6cm}|p{4cm}|}
+  \hline Название атрибута & Описание & Тип \\
+  \hline id & Уникальный идентификатор & int8 \\
+  \hline post_id & Идентификатор поста & int8 \\
+  \hline user_id & Идентификатор пользователя\\
+  \hline 
+  \end{tabular}
+\end{table}
+
+\begin{table}[H]
+  \caption{\onehalfspacing Описание структуры таблицы privelege}\label{database-table-privelege}
+  \begin{tabular}{|p{6cm}|p{6cm}|p{4cm}|}
+  \hline Название атрибута & Описание & Тип \\
+  \hline id & Уникальный идентификатор & int8 \\
+  \hline name & Наименование привелегии & varchar(255) \\
+  \hline 
+  \end{tabular}
+\end{table}
+
+\begin{table}[H]
+  \caption{\onehalfspacing Описание структуры таблицы roles_priveleges}\label{database-table-roles-priveleges}
+  \begin{tabular}{|p{6cm}|p{6cm}|p{4cm}|}
+  \hline Название атрибута & Описание & Тип \\
+  \hline id & Уникальный идентификатор & int8 \\
+  \hline role_id & Идентификатор роли & int8 \\
+  \hline privelege_id Идентификатор привелегии & int8 \\
+  \hline 
+  \end{tabular}
+\end{table}
+
+\begin{table}[H]
+  \caption{\onehalfspacing Описание структуры таблицы role}\label{database-table-role}
+  \begin{tabular}{|p{6cm}|p{6cm}|p{4cm}|}
+  \hline Название атрибута & Описание & Тип \\
+  \hline id & Уникальный идентификатор & int8 \\
+  \hline name & Наименование роли & varchar(255) \\
+  \hline
+  \end{tabular}
+\end{table}
+
+\begin{table}[H]
+  \caption{\onehalfspacing Описание структуры таблицы user_auth_cookie}\label{database-table-user-auth-cookie}
+  \begin{tabular}{|p{6cm}|p{6cm}|p{4cm}|}
+  \hline Название атрибута & Описание & Тип \\
+  \hline id & Уникальный идентификатор & int8 \\
+  \hline cookie & Содержимое куки & varchar(255) \\
+  \hline expires & Дата и время истечения срока действия & timestamp(6) \\
+  \hline user_id & Идентификатор пользователя & int8 \\
+  \hline
+  \end{tabular}
+\end{table}
+
+\begin{table}[H]
+  \caption{\onehalfspacing Описание структуры таблицы post_tag}\label{database-table-post-tag}
+  \begin{tabular}{|p{6cm}|p{6cm}|p{4cm}|}
+  \hline Название атрибута & Описание & Тип \\
+  \hline id & Уникальный идентификатор & int8 \\
+  \hline post_id & Идентификатор поста & int8 \\
+  \hline tag_id & Идентификатор тега & int8 \\
+  \hline
+  \end{tabular}
+\end{table}
+
+\begin{table}[H]
+  \caption{\onehalfspacing Описание структуры таблицы tag}\label{database-table-tag}
+  \begin{tabular}{|p{6cm}|p{6cm}|p{4cm}|}
+  \hline Название атрибута & Описание & Тип \\
+  \hline id & Уникальный идентификатор & int8 \\
+  \hline name & Наименование тега & varchar(255) \\
+  \hline world_net_class_id & Идентификатор класса & int8\\
+  \hline 
+  \end{tabular}
+\end{table}
+
+\begin{table}[H]
+  \caption{\onehalfspacing Описание структуры таблицы photo_group_color_area}\label{database-table-photo-group-color-area}
+  \begin{tabular}{|p{6cm}|p{6cm}|p{4cm}|}
+  \hline Название атрибута & Описание & Тип \\
+  \hline id & Уникальный идентификатор & int8 \\
+  \hline blue & Значение синего канала цвета & int4 \\
+  \hline red & Значение красного канала цвета & int4 \\
+  \hline green & Значение зеленого канала цвета & int4 \\
+  \hline rgb & Значение трёх каналов цветов & int4 \\
+  \hline photo_group_id & Идентификатор группы фотографий & int8 \\
+  \hline cluster_size & Размер кластера & int4 \\
+  \hline hex_color & hex представление значения цвета & varchar(255) \\
+  \hline 
+  \end{tabular}
+\end{table}
+
+\begin{table}[H]
+  \caption{\onehalfspacing Описание структуры таблицы photo_group_post}\label{database-table-photo-group-post}
+  \begin{tabular}{|p{6cm}|p{6cm}|p{4cm}|}
+  \hline Название атрибута & Описание & Тип \\
+  \hline id & Уникальный идентификатор & int8 \\
+  \hline photo_group_id & Идентификатор группы фотографий & int8 \\
+  \hline post_id & Идентификатор поста & int8 \\
+  \hline 
+  \end{tabular}
+\end{table}
+
+\begin{table}[H]
+  \caption{\onehalfspacing Описание структуры таблицы photo_group_tag}\label{database-table-photo-group-tag}
+  \begin{tabular}{|p{6cm}|p{6cm}|p{4cm}|}
+  \hline Название атрибута & Описание & Тип \\
+  \hline id & Уникальный идентификатор & int8 \\
+  \hline probability & Вероятность принадлежности к классу & int4 \\
+  \hline photo_group_id & Идентификатор группы фотографий & int8 \\
+  \hline tag_id & Уникальный идентификатор & int8 \\
+  \hline
+  \end{tabular}
+\end{table}
+
+\begin{table}[H]
+  \caption{\onehalfspacing Описание структуры таблицы photo_group_user_access}\label{database-table-photo-group-user-access}
+  \begin{tabular}{|p{6cm}|p{6cm}|p{4cm}|}
+  \hline Название атрибута & Описание & Тип \\
+  \hline id & Уникальный идентификатор & int8 \\
+  \hline photo_group_id & Идентификатор группы фотографий & int8 \\
+  \hline user_id & Идентификатор пользователя & int8 \\
+  \hline 
+  \end{tabular}
+\end{table}
+
+\begin{table}[H]
+  \caption{\onehalfspacing Описание структуры таблицы user_account}\label{database-table-user-account}
+  \begin{tabular}{|p{6cm}|p{6cm}|p{4cm}|}
+  \hline Название атрибута & Описание & Тип \\
+  \hline id & Уникальный идентификатор & int8 \\
+  \hline email & Адрес почтового ящика пользователя & varchar(255) \\
+  \hline is_enabled & Флаг активности пользователя & bool \\
+  \hline is_using2fa & Флаг использования двухфакторинговой авторизации & bool \\
+  \hline password & Хэш пароля пользователя & varchar(255) \\
+  \hline secret & Ответ на секретный вопрос для восстановления аккаунта & varchar(255) \\
+  \hline username & Имя пользователя & varchar(255) \\
+  \hline 
+  \end{tabular}
+\end{table}
+
+
+\begin{table}[H]
+  \caption{\onehalfspacing Описание структуры таблицы user_roles}\label{database-table-user-roles}
+  \begin{tabular}{|p{6cm}|p{6cm}|p{4cm}|}
+  \hline Название атрибута & Описание & Тип \\
+  \hline user_id & Идентификатор пользователя & int8 \\
+  \hline role_id & Идентификатор пользователя & int8 \\
+  \hline 
+  \end{tabular}
+\end{table}
+
+
+\begin{table}[H]
+  \caption{\onehalfspacing Описание структуры таблицы verification_token}\label{database-table-verification-token}
+  \begin{tabular}{|p{6cm}|p{6cm}|p{4cm}|}
+  \hline Название атрибута & Описание & Тип \\
+  \hline id & Уникальный идентификатор & int8 \\
+  \hline expiry_date & Дата и время истечения срока действия & timestamp(6) \\
+  \hline token & Токен & varchar(255) \\
+  \hline user_id & Идентификатор пользователя & int8 \\
+  \hline
+  \end{tabular}
+\end{table}
+
+\begin{table}[H]
+  \caption{\onehalfspacing Описание структуры таблицы password_reset_token}\label{database-table-password-reset-token}
+  \begin{tabular}{|p{6cm}|p{6cm}|p{4cm}|}
+  \hline Название атрибута & Описание & Тип \\
+  \hline id & Уникальный идентификатор & int8 \\
+  \hline expiry_date & Дата и время истечения срока действия & timestamp(6) \\
+  \hline token & Токен & varchar(255) \\
+  \hline user_id & Идентификатор пользователя & int8 \\
+  \hline
+  \end{tabular}
+\end{table}
+
+
+\begin{table}[H]
+  \caption{\onehalfspacing Описание структуры таблицы comment}\label{database-table-comment}
+  \begin{tabular}{|p{6cm}|p{6cm}|p{4cm}|}
+  \hline Название атрибута & Описание & Тип \\
+  \hline id & Уникальный идентификатор & int8 \\
+  \hline text & Текст комментария & varchar(255) \\
+  \hline parent_comment_id & Идентификатор родительского комментария & int8 \\
+  \hline photo_group_id & Идентификатор комментируемой группы фотографий & int8 \\
+  \hline user_id & Идентификатор пользователя, оставившего комментарий & int8 \\
+  \hline 
+  \end{tabular}
+\end{table}
+
+
+\begin{table}[H]
+  \caption{\onehalfspacing Описание структуры таблицы photo_group}\label{database-table-photo-group}
+  \begin{tabular}{|p{6cm}|p{6cm}|p{4cm}|}
+  \hline Название атрибута & Описание & Тип \\
+  \hline id & Уникальный идентификатор & int8 \\
+  \hline error_text & Текст ошибки, возникшей в ходе обработки & varchar(255) \\
+  \hline has_preview & Уникальный идентификатор & bool \\
+  \hline is_clustered & Флаг кластеризованности группы фотографий & bool \\
+  \hline is_erroneous & Флаг наличия ошибки в группе фотографий & bool \\
+  \end{tabular}
+\end{table}
+
+\begin{table}[H]
+  \caption*{\onehalfspacing Окончание таблицы \ref{database-table-photo-group}}
+  \begin{tabular}{|p{6cm}|p{6cm}|p{4cm}|}
+  \hline Название атрибута & Описание & Тип \\
+  \hline is_metadata_extracted & Флаг извлеченности метаданных в группе фотографий & bool \\
+  \hline is_tagged & Флаг тегированности группы фотографий & bool \\
+  \hline privacy_type & Тип приватности группы фотографий & int4 \\
+  \hline uuid & Уникальный идентификатор для обращения из веб интерфейса & varchar(255) \\
+  \hline user_id & Идентификатор пользователя & int8 \\
+  \hline
+  \end{tabular}
+\end{table}
+
+\begin{table}[H]
+  \caption{\onehalfspacing Описание структуры таблицы photo_single}\label{database-table-photo-single}
+  \begin{tabular}{|p{6cm}|p{6cm}|p{4cm}|}
+  \hline Название атрибута & Описание & Тип \\
+  \hline id & Уникальный идентификатор & int8 \\
+  \hline is_erroneous & Флаг наличия ошибки в фотографии & bool \\
+  \hline path & Путь к фотографии на файловом хранилище & varchar(255) \\
+  \hline photo_type & Тип фотографии & int5 \\
+  \hline photo_group_id & Идентификатор группы & int8 \\
+  \hline
+  \end{tabular}
+\end{table}
+
+\begin{table}[H]
+  \caption{\onehalfspacing Описание структуры таблицы photo_group_user_like}\label{database-table-photo-group-user-like}
+  \begin{tabular}{|p{6cm}|p{6cm}|p{4cm}|}
+  \hline Название атрибута & Описание & Тип \\
+  \hline id & Уникальный идентификатор & int8 \\
+  \hline photo_group_id & Идентификатор группы фотографий & int8 \\
+  \hline user_id & Идентификатор пользователя\\
+  \hline 
+  \end{tabular}
+\end{table}
+
+\clearpage
+
+\section{Реализация системы}
+\subsection{Описание разработанных модулей}
+\begin{table}[H]
+  \caption{\onehalfspacing Модули онлайн-сервиса с элементами социальной сети для публикации фотографий}\label{user-classes-table}
+  \begin{tabular}{|p{4cm}|p{12cm}|}
+  \hline Название модуля & Описание \\ 
+  \hline authentication & Классы контроллеров аутентификации \\ 
+  \hline exception & Классы исключений \\ 
+  \hline mapper & Классы блоков отображений \\ 
+  \hline monitoring & Классы отслеживания данных приложения \\ 
+  \hline persistence & Классы для работы с базой данных \\ 
+  \hline property & Классы настроек сервиса \\ 
+  \hline registration & Классы контроллеров регистрации \\ 
+  \hline service & Классы сервисов \\ 
+  \hline Название модуля & Описание \\ 
+  \hline spring & Классы настроек spring \\ 
+  \hline util & Классы инструментов \\ 
+  \hline validation & Классы валидации \\ 
+  \hline web & Классы контроллеры сервиса, отвечающие на входящие запросы \\ 
+  \hline resources.template & Модуль, содержащий описание графического интерфейса приложения \\ 
+  \hline
+  \end{tabular}
+\end{table}
+
+
+\subsection{Описание схемы разделения данных приложения.}
+
+Приложение разрабатывалось с использованием схемы разделения данных модель-представление-контроллер.
+
+Модель представляют классы предметной области, являющиеся отображением таблиц базы данных и находящиеся в пакете persistence.
+Представление определяют классы, находящиеся в модуле resources.template.
+Контроллеры разделены на два слоя: контроллеры запросов, находящиеся в модуле web и сервисы, находящиеся в модуле service.
+
+Контроллеры запросов принимают входящие запросы, преобразуют и формируют запросы к сервисам, которые в свою очередь работают с объектами предметной области и содержат бизнес-логику приложения.
+Готовые ответы от сервисов в виде совокупности объектов предметной области преобразуются контроллерами с помощью блоков отображений в корректные ответы для клиентов, посылающих запросы и отправляют им ответы на посланные ими запросы.
+
+Примененная схема разделения данных позволяет отделить бизнес-логику приложения от запросов и визуализации и выделить классы отображающие таблицы базы данных.
+Данный вид разделения способствует повторному использованию кода и облегчает процесс сопровождения приложения.
+
+\clearpage
